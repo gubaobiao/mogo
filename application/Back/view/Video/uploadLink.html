@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>看企业管理平台—引用视频平台作品上传</title>
+	<script src="/static/user/jq/jquery-1.11.1.min.js"></script>
+	<link rel="stylesheet" href="/static/user/jq/amazeui.min.css">
+	<link rel="stylesheet" href="/static/user/jq/amazeui.cropper.css">
+	<link rel="stylesheet" href="/static/user/jq/custom_up_img.css">
+	<link rel="stylesheet" href="/static/user/bootstrap/css/bootstrap.min.css">
+	<script src="/static/user/bootstrap/js/bootstrap.min.js"></script>
+	<script src="/static/user/layer/layer.js"></script>
+	<link rel="stylesheet" href="/static/user/css/public.css">
+	<link rel="stylesheet" href="/static/user/css/video_upload.css">
+	<script type="text/javascript" src="/static/user/tailuneditor/ueditor.config.js"></script>
+    <!-- 编辑器源码文件 -->
+    <script type="text/javascript" src="/static/user/tailuneditor/ueditor.all.js"></script>
+    <!-- 实例化编辑器 -->
+	<!--[if lt IE 9]>
+	    <script src="/static/user/bootstrap/js/html5shiv.min.js"></script>
+	    <script src="/static/user/bootstrap/js/respond.min.js"></script>
+    <![endif]-->
+     <style>
+    	.aaa input[type=radio]{
+			display:inline-block;
+			width: 15px;
+	    height: 15px;
+			}
+			#timer {
+	    display: none;
+		}
+    </style>
+</head>
+<body>
+	<div id="kqy_main">
+		<div class="kqy_title">
+			<span class="max_font_size">引用视频平台作品</span>
+		</div>
+		<div class="kqy_content">
+			<form action="" method="post" id="form">
+				<div class="box uplaod_img_show">
+					<div class="upload_img">
+						<input type="hidden" name="upload_img" value="">
+						<div class="mask"><img src="/static/user/img/rem_btn.png" alt=""></div>
+					</div>
+					<span class="up-img-touch">编辑封面（16/9）</span>
+				</div>
+				<div class="box video_link">
+					<div class="font-style">
+						<span class="must">视频链接：</span>
+						<span>支持引用优酷、腾讯、爱奇艺视频！<a href="/info.html" target="_blank">如何添加视频?</a></span>
+						<span class="error">请输入正确的视频链接</span>
+					</div>
+					<div class="input_box">
+						<input type="text" name="video_link" >
+						<!-- <span class="button_box"><button type="button" class="active">插入视频</button></span> -->
+					</div>
+				</div>
+				<div class="clear"></div>
+				<div class="box wid150">
+					<div class="font-style">
+						<span class="must">视频类型：</span>
+						<span class="error"></span>
+					</div>
+					<div class="input_box">
+						<div class="select_box">
+							<input type="hidden" name="type" value="0">
+							<div class="top">请选择类型</div>
+							<ul>
+							{volist name="videocate" id="vo"}
+							<li data-id="{$vo.type}">{$vo.catename}</li>
+							{/volist}
+							</ul>
+						</div>
+					</div>
+				</div>
+				<!-- <div class="box wid150">
+					<div class="font-style">
+						<span class="must">主体行业：</span>
+						<span class="error"></span>
+					</div>
+					<div class="input_box">
+						<div class="select_box">
+							<input type="hidden" name="trade" value="0">
+							<div class="top">请选择行业</div>
+							<ul>
+							<foreach name="industy" item="inlist">
+								<li data-id="$inlist.id">$inlist.industryname</li>
+							</foreach>
+							</ul>
+						</div>
+					</div>
+				</div> -->
+				<!-- <div class="box wid180">
+					<div class="font-style">
+						<span class="no_must"></span>
+					</div>
+					<div class="input_box">
+						<input type="text" name="video_name" placeholder="视频宣传的公司全称">
+					</div>
+				</div> -->
+				<!-- <div class="box wid520">
+					<div class="font-style">
+						<span class="no_must">上传脚本：</span>
+						<span>本地上传</span>
+					</div>
+					<div class="input_box">
+						<input type="text" class="fileOFS" readonly="readonly" placeholder="点击上传相应的脚本或项目文件将直接推送至精选（*.doc，*.ppt）">
+					</div>
+				</div> -->
+				<div class="clear"></div>
+				<div class="box wid520">
+					<div class="font-style">
+						<span class="must">视频标题：</span>
+						<span class="error">视频标题不能为空且10~60个字！</span>
+					</div>
+					<div class="input_box">
+						<input type="text" name="video_title" placeholder="最少为10个字，最多不超过60个">
+					</div>
+				</div>
+				<div class="box wid520" style="width: auto;min-width: 520px;">
+					<div class="font-style">
+						<span class="must">视频标签（标签与标签用空格分割）：</span>
+						<span class="error">视频标签不能为空且3-12个字，最多3个，空格分隔！</span>
+					</div>
+					
+					<div class="input_box">
+						<input type="hidden" name="video_label" value="$data['label']" placeholder="视频标签3-12个字，最多3个，空格分隔">
+						<div class="video_labels" style="width: auto;min-width: 520px;">
+							<div class="bel" style="margin-left: 15px;"></div>	
+							<div class="bels">
+								<input type="text" class="inputbel" placeholder="空格分隔">
+							</div>
+							
+						</div>
+						<span class="video_label">阿里巴巴十周年</span>
+						<span class="video_label">淘宝网拍摄花絮</span>
+						<span class="video_label">pr剪辑教程</span>
+					</div>					
+				</div>
+				<div class="clear"></div>
+				<div class="box wid520">
+					<div class="font-style">
+						<span class="must">视频简介：</span>
+						<span class="error">视频简介不能为空且不超过200字！</span>
+					</div>
+					<div class="input_box">
+						<textarea name="video_brief" placeholder="不超过200字，简单的文字对视频进行介绍"></textarea>
+					</div>
+				</div>
+			
+				<!-- <div class="box">
+					<div class="font-style">
+						<span class="no_must">作品费用(元)：</span>
+						<span class="error">费用必须大于500，小于9999999</span>
+					</div>
+					<div class="input_box">
+						<input type="number" min="500" max="9999999" name="video_sum" placeholder="如果有客户想拍同样的，您期望费用为？">
+					</div>
+				</div> -->
+				<div class="clear"></div>
+				<div class="box">
+					<div class="font-style">
+						<span class="must">视频详情：</span>
+						<span>在这里填写详细内容给大家吧</span>
+						<span class="error">视频详情不能为空！</span>
+					</div>
+					<div class="input_box">
+						<script id="container" name="content" type="text/plain"></script>
+					</div>
+				</div>
+				<div class="clear"></div>
+				
+				<div class="box video_button" style="float:none;">
+					<div class="button_box">
+						
+						<button type="button" data-type="2" class="holdBtns hold">只保存不发布</button>
+						<button type="button" data-type="1" class="qdBtn active">提交官方审核</button>
+						<button type="button" onclick="javascript:history.back(-1)">取消</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+	<!--图片上传框-->
+	<div class="am-modal am-modal-no-btn up-frame-bj " tabindex="-1" id="doc-modal-1">
+		<div class="am-modal-dialog up-frame-parent up-frame-radius">
+			<div class="am-modal-hd up-frame-header">
+				<label>上传封面</label>
+				<a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close="">×</a>
+			</div>
+			<div class="am-modal-bd  up-frame-body">
+				<div class="am-g am-fl">
+					<div class="am-form-group am-form-file">
+						<div class="am-fl">
+							<button type="button" class="am-btn am-btn-default am-btn-sm">
+								选择要上传的图片
+							</button>
+						</div>
+						<input type="file" id="inputImage" accept="image/png,image/jpeg,image/jpeg,image/bmp">
+					</div>
+				</div>
+				<div class="am-g am-fl">
+					<div class="up-pre-before up-frame-radius">
+						<img alt="" src="" id="image">
+					</div>
+					<div class="up-pre-after up-frame-radius">
+					</div>
+				</div>
+				<div class="am-g am-fl">
+					<div class="up-control-btns">
+						<span id="up-btn-ok">确定</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--  -->
+	<script src="/static/user/jq/amazeui.min.js" charset="utf-8"></script>
+    <script src="/static/user/jq/cropper.min.js" charset="utf-8"></script>
+    <script src="/static/user/jq/custom_up_img_16_9.js" charset="utf-8"></script>
+	<script src="/static/user/js/select.js" charset="utf-8"></script>
+    <script src="/static/user/js/video_upload.js"></script>
+    <script src="/static/user/laydate/laydate.js"></script>
+    <script>
+    	var isFlog = true;
+    	//上传
+    	function formSubmitAjax(_this){
+    		if(isFlog){
+    			isFlog = true;
+    			// var type=$(_this).attr('data-type'), lady;
+	    		// $('input[name="type"]').val(type);
+	    		
+				$.ajax({
+					type:"post",
+					url:'{:url('Video/addVideo')}',
+					data:$('#form').serialize(),
+					dataType:'json',
+					success:function(data){
+						
+						if(data.msg==1){
+							layer.msg('提交成功,请耐心等待官方的审核！', {icon: 1,time:3000},function(){
+								window.parent.tabs('{:url('User/Video/myVideos')}','{:url('User/Video/myVideos')}','我的视频');
+								window.parent.remtabs('{:url('User/Video/uploadVideo')}');
+							});
+						}else if(data.msg == 3){
+							layer.msg('保存成功！', {icon: 1,time:3000},function(){
+								window.parent.tabs('{:url('User/Video/myVideos')}','{:url('User/Video/myVideos')}','我的视频');
+								window.parent.remtabs('{:url('User/Video/uploadVideo')}');
+							});
+						}else{
+							//isFlog = true;
+							//layer.msg('提交失败', {icon: 2,time:1000});
+						}
+					},
+					error:function(msg){
+						
+					} 
+				})
+    		}
+		};
+		
+		
+		//标签
+		var vbel="";var num=0;
+		$(".inputbel").on("focus",function(){
+			$(".video_labels").css({"border":"1px solid #FFA200"})
+		})
+		$(".inputbel").on("blur",function(){
+			vbel = "";
+			$(".video_labels").css({"border":"1px solid  #d5d5d5"})
+			for(var i= 0;i<$(".bel").find(".slabel").length;i++){
+			   vbel += $($(".bel").find(".slabel")[i]).text().trim()+" ";
+			}
+			$("input[name='video_label']").val(vbel.trim())
+		})
+		
+		$(".inputbel").on('keydown', function(event) {
+			num = $(this).val().length;//0
+		if (event.keyCode == "32") {
+			//回车执行查询
+			if($(".bel").find(".slabel").length>=3){
+				layer.msg('最多只能添加三个', {icon: 2,time:1000});
+				$(this).val("");
+			}else if($(this).val().trim().length<2 ||$(this).val().trim().length>12 ){
+				layer.msg('请填写标签,2-12个字', {icon: 2,time:1000});
+				$(this).val("");
+			}else{
+				var value = $(this).val();
+				$(".bel").append('<span class="video_label slabel" contenteditable="false">'+value+'</span>');
+				$(this).val("");			
+			}
+		}else if(event.keyCode == "8"){
+			if(num==0){
+				$(".bel .slabel:last-child").remove()
+			}	
+		}
+	    });
+	     laydate({
+		elem: '#timer',
+		  format: 'YYYY-MM-DD hh:mm:ss', // 分隔符可以任意定义，该例子表示只显示年月
+		  festival: true, //显示节日
+		  istime: true
+		});
+
+		$('.timer').click(function(){ // 显示/隐藏选择时间插件
+			var self = $(this);
+			$(this).attr('id') == 'yes' ? $('#timer').fadeIn(200) : $('#timer').fadeOut(200);
+		})	
+    </script>
+</body>
+</html>

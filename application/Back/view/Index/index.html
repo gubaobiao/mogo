@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<title>看企业—用户管理后台系统</title>
+	<script src="/static/user/jq/jquery-1.11.1.min.js"></script>
+	<link rel="stylesheet" href="/static/user/bootstrap/css/bootstrap.min.css">
+	<script src="/static/user/bootstrap/js/bootstrap.min.js"></script>
+	<script src="/static/user/layer/layer.js"></script>
+	<!-- <link rel="stylesheet" href="/static/user/css/public.css"> -->
+	<link rel="stylesheet" href="/static/user/css/public2.css">
+	<!-- <link rel="stylesheet" href="/static/user/css/index.css"> -->
+	<link rel="stylesheet" href="/static/user/css/index2.css">
+	<!--[if lt IE 9]>
+	    <script src="/static/User/bootstrap/js/html5shiv.min.js"></script>
+	    <script src="/static/User/bootstrap/js/respond.min.js"></script>
+    <![endif]-->
+    
+</head>
+<body>
+	<!-- 头nav开始 -->
+	<nav id="nav">
+		<div class="logo">
+			<a href="">
+				<img src="/static/user/img/logo-oa.png" alt="看企业后台"/>
+			</a>
+		</div>
+		<input type="hidden" id="isZL" value="" >
+		<input type="hidden" id="isCR" value="" >
+		<!-- 头nav 主体内容开始 -->
+		<div class="nav_main">
+			<div class="nav_name">
+				
+			</div>
+			
+		</div>
+		<!-- 头nav 主体内容结束 -->
+	</nav>
+	<!-- 头nav结束 -->
+	<div id="main">
+		<!-- 左边导航开始 -->
+		
+			<div class="boxs">
+				<div class="box_btn">
+					<span class="kqy_icon kqy_icon_vadio"></span>
+					<a href="#">视频管理</a>
+					<span class="caret"></span>
+				</div>
+				<ul class="down_list">
+					<li>
+						<a href="{:url('Video/uploadVideo')}" data-url="video_upload.html">上传视频</a>
+					</li>
+					<li>
+						<a href="my_video.html" data-url="my_video.html">我的视频</a>
+					</li>
+				</ul>
+			</div>
+			<div class="boxs">
+				<div class="box_btn">
+					<span class="kqy_icon kqy_icon_article"></span>
+					<a href="#">文章管理</a>
+					<span class="caret"></span>
+				</div>
+				<ul class="down_list">
+					<li>
+						<a href="article_upload.html" data-url="article_upload.html">发表文章</a>
+					</li>
+					<li>
+						<a href="my_article.html" data-url="my_article.html">我的文章</a>
+					</li>
+				</ul>
+			</div>
+			<!-- <div class="boxs">
+				<div class="box_btn">
+					<span class="kqy_icon kqy_icon_topic"></span>
+					<a href="#">话题</a>
+					<span class="caret"></span>
+				</div>
+				<ul class="down_list">
+					<li>
+						<a href="topic_upload.html" data-url="topic_upload.html">发布新的话题</a>
+					</li>
+					<li>
+						<a href="my_topic.html" data-url="my_topic.html">我发布的话题</a>
+					</li>
+					<li>
+						<a href="my_partake_topic.html" data-url="my_partake_topic.html">我参与的话题</a>
+					</li>
+				</ul>
+			</div -->
+		
+				
+				
+			</div>
+			
+			
+		</div>
+		<!-- 左边导航结束 -->
+		<!-- 右边选项卡开始 -->
+		<div id="main_right">
+			<div id="main_tab">
+				<ul class="main_tab_btn">
+			
+				</ul>
+			</div>
+
+			<div id="main_iframe">
+				<iframe class="active" src="{:url('index/home')}" width="100%" height="100%" frameborder="0" scrolling="auto"></iframe>
+			</div>
+		</div>
+		<!-- 右边选项卡结束 main_tab	</div>
+	<!-- ie10- 提示框 -->
+	<div id="ie_mask">
+		<div id="ie">
+			<span class="close">&times;</span>
+			<img src="/static/user/img/ie-mask.png" alt="">
+			<ul>
+				<li><a href="https://support.microsoft.com/zh-cn/help/17621/internet-explorer-downloads?spm=875.7931836%2FA.a2226mw.1.3OuE3q" target="_blank"><img src="/static/user/img/btn.png" alt=""></a></li>
+				<li><a href="http://www.googlechromer.cn/" target="_blank"><img src="/static/user/img/btn.png" alt=""></a></li>
+				<li><a href="http://www.firefox.com.cn/" target="_blank"><img src="/static/user/img/btn.png" alt=""></a></li>
+			</ul>
+		</div>
+	</div>
+
+	<script src="/static/user/js/xh.scrollUp.js"></script>
+	<script src="/static/user/js/index.js"></script>
+	<script src="/static/index/layer/layer.js"></script>
+	<script type="text/javascript">
+		$("#nav_name").scrollUp({ // 公告滚动初始化
+		    list:".inform_box",
+		    item:".inform_item",
+		    line:1,
+		    speed:800,
+		    timer:3000
+		});
+
+		if($('#isZL').val() == 1){ // 判断是否填写过资料，如果没有，则进入
+			$('.box_real:first').unbind('click');
+			$('.box_real:first').on('click','.box_btn',function(e){
+				e.preventDefault();
+
+                var open1 = layer.open({
+                   title: false,
+                   closeBtn: 0,
+                   content: '请先完善个人资料中的基本资料，再认证！',
+                   btn: ['确定'],
+                   yes: function(layero){
+                       layer.close(open1);
+                       tabs('{('User/Index/informationBasic')}','{('User/Index/informationBasic')}', '基本资料');
+                   }
+               })
+			});
+		}
+
+		if($("#user_id").val()==2){ // 判断是否认证过，如果没认证，某些功能不开放
+			$('.boxs').unbind("click");
+			$('.box_real:not(:first)').unbind("click");
+			$('.boxs:not(:first)').on('click','.box_btn',function(e){
+				e.preventDefault();
+				notice();
+
+			});	
+			$('.box_real:not(:first)').on('click','.box_btn',function(e){
+				e.preventDefault();
+				notice();
+
+			});			
+			$('.boxs:first').on('click','.box_btn',function(e){
+				e.preventDefault();
+				$(this).toggleClass('active').parents('.boxs').siblings('.boxs').find('.box_btn').removeClass('active');
+				$(this).siblings('.down_list').slideToggle().parents('.boxs').siblings('.boxs').find('.down_list').slideUp();
+			});		
+		}
+
+		function notice(){
+	        $.ajax({
+	        type: "post",
+	        url: "('User/index/ajaxrz')}",
+	        data:"",
+	        dataType: "json",
+	        success: function (data) {
+	      	if(data.status==1){
+		  			layer.open({
+					  type: 1
+					  ,title: data.title //不显示标题栏
+					  ,closeBtn: false
+					  ,area: "550px"
+					  ,shade: 0.8
+					  ,id: 'LAY_layuipro' //设定一个id，防止重复弹出
+					  ,resize: false
+					  ,btn: ['确认', '取消']
+					  ,btnAlign: 'c'
+					  ,move: '#LAY_layuipro'
+					  ,moveType: 1 //拖拽模式，0或者1
+					  ,content: '<div style="font-size:14px; padding: 50px; line-height: 22px; background-color: #393D49; color: #fff; font-weight: 300;">'+data.content+'</div>'
+					  ,success: function(layero){
+					  		$(".layui-layer .layui-layer-btn-c").show();
+						    var btn = layero.find('.layui-layer-btn');
+						    btn.find('.layui-layer-btn0').attr({
+						      href: data.url
+						    });	  		
+					  	//60000 
+				
+					  }
+					});	
+		      	}
+	                
+	        },
+	    });
+	}
+	$(document).on('click','.layui-layer-btn0',function(e){
+		e.preventDefault();
+		var url,dataUrl;
+		url=dataUrl=$(this).attr('href');
+		
+		if(url){
+			$('#isZL').val() == 1 ? tabs('('User/Index/informationBasic')}','('User/Index/informationBasic')}', '基本资料') :tabs(url,dataUrl,"实名认证");
+		}
+	})
+
+	/**
+     * 获取消息
+     */
+    function getMessages() {
+        var messageCountItem = $("#new_messages_count");
+        // var messageTab1 = $("#message-tab .message1");
+        // var messageTab2 = $("#message-tab .message2");
+        // var messageTab3 = $("#message-tab .message3");
+        // var messageTab4 = $("#message-tab .message4");
+        var hasNewMessage = '<i class="message_icon message_d"></i>';
+        var messageItem = $(".message-item");
+        var messageBoxes = $(".message-item .content");
+
+        messageBoxes.find('.ms-item').remove();
+        $.ajax({
+            url : "('Index/Behind/getUserMessages')}",
+            type : "get",
+            dataType : "json",
+            success : function (data) {
+                messageCountItem.text(data['messages_count']);
+                var privateMessages = data['top_private_messages'] || null;
+                var privateMessagesCount = privateMessages.length;
+                var commentMessages = data['top_comment_messages'] || null;
+                var commentMessagesCount = commentMessages.length;
+                var notices = data['top_notice_messages'] || null;
+				var noticesCount = notices.length;
+                if(privateMessagesCount && privateMessagesCount != 0) {
+                    // messageTab1.append(hasNewMessage);
+					messageItem.eq(0).find('#noMessage1').hide();
+					messageItem.eq(0).addClass('current').siblings().removeClass('current');
+					console.log(messageItem.eq(0).hasClass('current'));
+                    for(var i = 0; i < privateMessagesCount; i++) {
+                        var item = '<div class="ms-item">\
+                                <a href="(\'User/Index/index\')}?tab=User/MessageCenter/personalMessages&tab_name=消息中心" target="_blank">\
+                                <p class="t-overflow ms-name marb5"><span>'+privateMessages[i]['sender']+'</span> 给你发来了私信。</p>\
+                            <p class="fh">'+privateMessages[i]['add_time']+' </p></a></div>';
+                        messageBoxes.eq(0).prepend(item);
+					}
+					return false;
+                } else {
+					console.log(11);
+					
+                    // messageTab1.empty();
+                    messageBoxes.eq(0).hide();
+                    messageItem.eq(0).find('#noMessage1').show();
+                }
+
+                if(commentMessagesCount && commentMessagesCount != 0) {
+                    // messageTab2.append(hasNewMessage);
+					messageItem.eq(1).find('#noMessage1').hide();
+					messageItem.eq(1).addClass('current').siblings().removeClass('current');
+					console.log(messageItem.eq(1).hasClass('current'));
+					
+                    for(var i = 0; i < commentMessagesCount; i++) {
+                        var item = '<div class="ms-item">\
+                                <a href="{(\'User/Index/index\')}?tab=User/MessageCenter/comments&tab_name=消息中心" target="_blank">\
+                                <p class="t-overflow ms-name"><span>'+commentMessages[i]['sender']+'</span> '+commentMessages[i]['content']+'</p>\
+                            <p class="fh">'+commentMessages[i]['add_time']+' </p>\</a></div>';
+                        messageBoxes.eq(1).prepend(item);
+					}
+					return false;
+					
+                } else {
+					console.log(22);
+					
+                    // messageTab2.empty();
+                    messageBoxes.eq(1).hide();
+                    messageItem.eq(1).find('#noMessage2').show();
+                }
+
+                if(noticesCount && noticesCount != 0) {
+//                        messageTab4.append(hasNewMessage);
+					   messageItem.eq(2).find('#noMessage1').hide();
+					messageItem.eq(2).addClass('current').siblings().removeClass('current');
+					console.log(messageItem.eq(2).hasClass('current'));
+					
+                    for(var i = 0; i < noticesCount; i++) {
+                        var item = '<div class="ms-item">\
+                                <a href="{(\'User/Index/index\')}?tab=User/MessageCenter/notices&tab_name=消息中心" target="_blank">\
+                                <p class="t-overflow ms-name marb5"><span>'+notices[i]['title']+'</span></p>\
+                            <p class="fh">'+notices[i]['add_time']+' </p></a></div>';
+                        messageBoxes.eq(2).prepend(item);
+					}
+					return false;
+					
+                } else {
+					console.log(33);
+					
+                    // messageTab4.empty();
+                    messageBoxes.eq(2).hide();
+                    messageItem.eq(2).find('#noMessage3').show();
+                }
+            }
+        });
+    }
+
+    $(document).ready(function () {
+        //定时获取消息
+        setInterval("getMessages()", 30000);
+        getMessages();
+    });
+
+    // $('#message-tab>li').mouseover(function(){ // 顶部信息栏切换功能
+    //     var self = $(this), index;
+
+    //     if(self.hasClass('current')) return ;
+    //     index = self.index();
+    //     self.addClass('current').siblings().removeClass('current');
+    //     $('#message-box>.message-item').eq(index).addClass('current').siblings().removeClass('current');
+    // });
+
+    $(document).on('click','.menu_jup',function(event){ // 顶部导航某些东西，需要通过这个JS打开页面
+       
+        event.preventDefault();
+        var that = $(this),
+            hUrl = that.attr('href'),
+            hDataUrl = that.attr('data-url'),
+            hName = that.attr('data-name');
+       
+        tabs(hUrl, hDataUrl, hName);
+    });
+
+
+    $('.boxs').click(function(){
+    			if($(this).find('span').eq(1).hasClass('lefticon')){
+    				$(this).find('span').eq(1).removeClass('lefticon').addClass('downicon');
+    				$(this).siblings('.boxs').find('span:odd').removeClass('downicon').addClass('lefticon');
+
+    			}else{
+    				$(this).find('span').eq(1).removeClass('downicon').addClass('lefticon')
+    			};
+    		})
+	</script>
+
+
+</body>
+<script>
+
+    //百度统计代码
+    var _hmt = _hmt || [];
+
+    (function() {
+        var hm = document.createElement("script");
+
+        hm.src = "https://hm.baidu.com/hm.js?31531d05a781a72185052ae724574f7b";
+
+        var s = document.getElementsByTagName("script")[0];
+
+        s.parentNode.insertBefore(hm, s);
+    })();
+
+</script>
+<script type="text/javascript">
+     function abc(){
+        var path = $('#websites').val();
+        console.log(path);
+        path != '' ? window.open(path) : layer.msg('您还未开通网站！请去后台开通！', {time: 2000});
+	 }
+ var bridge = setInterval(function(){
+  if( $('#newBridge')){
+     $('#newBridge').remove();
+     clearInterval(bridge);
+    }
+},500);
+</script>
+</html>

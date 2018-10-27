@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>看企业管理平台—基本资料</title>
+	
+	<link rel="stylesheet" href="__PUBLIC__/user/bootstrap/css/bootstrap.min.css">
+
+	<link rel="stylesheet" href="__PUBLIC__/user/css/public.css">
+	<link rel="stylesheet" href="__PUBLIC__/user/css/information_basic.css">
+	<!--[if lt IE 9]>
+	    <script src="__PUBLIC__/user/bootstrap/js/html5shiv.min.js"></script>
+	    <script src="__PUBLIC__/user/bootstrap/js/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+	<div id="kqy_main">
+		<div class="kqy_title">
+			<span class="max_font_size">个人信息</span>
+			<span class="font-size-m"> - </span>
+			<span class="min_font_size">修改并完善你的个人信息，将显示在平台上，也可以让更多的朋友了解和认识你！</span>
+		</div>
+		<div class="kqy_content">
+			<form action="../php/1.php" method="post" id="form">
+				<div class="box">
+					<div class="font-style">
+						<span class="must">昵称：</span>
+					</div>
+					<div class="input_box">
+						<input type="text" name="user" placeholder="还可以输入2-5字" value="{$info['user_nicename']}"><span class="error">请输入你的昵称2-5个字</span>
+					</div>
+				</div>
+				<div class="box">
+					<div class="font-style">
+						<span class="must">绑定邮箱：</span>
+						<span>仅限QQ邮箱</span>
+					</div>
+					<div class="input_box">
+						<input type="text" name="mailbox" placeholder="123456789@qq.com" value="{$info['user_email']}"><span class="error">请输入你的邮箱</span>
+					</div>
+				</div>
+				<div class="box dsf">
+					<div class="font-style">
+						<span class="must">第三方账号绑定：</span>
+					</div>
+					<p class="login-qq">
+						<span>QQ</span>
+						<if condition="$info.qq_openid eq 2">
+							<em>未绑定</em>
+							<button data-type = "qq" type="button" class="zhanshi bangding btn btn-default btn-sm">绑定</button>
+							<button data-type = "qq" type="button" class="jiebang btn btn-default btn-sm">解绑</button>
+							<else />
+							<em>已绑定</em>
+							<button data-type = "qq" type="button" class="bangding btn btn-default btn-sm">绑定</button>
+							<button data-type = "qq" type="button" class="zhanshi jiebang btn btn-default btn-sm">解绑</button>
+						</if>
+					</p>
+					<p class="login-wx">
+						<span>微信</span>
+						<if condition="$info.wx_openid eq 2">
+							<em>未绑定</em>
+							<button data-type = "wx" type="button" class="zhanshi bangding btn btn-default btn-sm">绑定</button>
+							<button data-type = "wx" type="button" class="jiebang btn btn-default btn-sm">解绑</button>
+							<else />
+							<em>已绑定</em>
+							<button data-type = "wx" type="button" class="bangding btn btn-default btn-sm">绑定</button>
+							<button data-type = "wx" type="button" class="zhanshi jiebang btn btn-default btn-sm">解绑</button>
+						</if>
+					</p>
+					<p class="login-wb">
+						<span>微博</span>
+						<if condition="$info.wb_openid eq 2">
+							<em>未绑定</em>
+							<button data-type = "wb" type="button" class="zhanshi bangding btn btn-default btn-sm">绑定</button>
+							<button data-type = "wb" type="button" class="jiebang btn btn-default btn-sm">解绑</button>
+							<else />
+							<em>已绑定</em>
+							<button data-type = "wb" type="button" class="bangding btn btn-default btn-sm">绑定</button>
+							<button data-type = "wb" type="button" class="zhanshi jiebang btn btn-default btn-sm">解绑</button>
+						</if>
+					</p>
+				</div>
+				<div class="box">
+					<div class="font-style">
+						<span class="must">性别：</span>
+						<span class="error">请选择你的性别</span>
+					</div>
+					<div class="input_box">
+						<if condition="$info['sex'] eq 1">
+							<label class="checked"><input type="radio" name="sex" value="1" checked />男</label>
+							<label><input type="radio" name="sex" value="2" />女</label>
+							<elseif condition="$info['sex'] eq 2"/>
+							<label><input type="radio" name="sex" value="1" />男</label>
+							<label class="checked"><input type="radio" name="sex" value="2" checked />女</label>
+							<else/>
+							<label><input type="radio" name="sex" value="1" />男</label>
+							<label><input type="radio" name="sex" value="2" />女</label>
+						</if>
+					</div>
+				</div>
+				<div class="box">
+					<div class="font-style">
+						<span class="no_must">生日：</span>
+					</div>
+					<div class="input_box">
+						<php>$birth = '';</php>
+						<if condition="empty($info['birthday_lunar'])">
+							<php>$birth = $info['birthday'];</php>
+							<label class="checked"><input type="radio" name="birth_type" value="1" checked />阳历</label>
+							<label><input type="radio" name="birth_type" value="2" />农历</label>
+							<else/>
+							<php>$birth = $info['birthday_lunar'];</php>
+							<label><input type="radio" name="birth_type" value="1" />阳历</label>
+							<label class="checked"><input type="radio" name="birth_type" value="2" checked />农历</label>
+						</if>
+						<php>
+							$birthArray = explode('-', $birth);
+						</php>
+					</div>
+
+					<div class="input_box">
+						<div class="select_box">
+							<input type="hidden" name="year" value="{$birthArray[0]|default='2017'}">
+							<div class="top">{$birthArray[0]|default='2017'}</div>
+							<ul>
+
+								<!-- <li class="active" data-id="2017">2017</li>
+								<li data-id="2016">2016</li> -->
+							</ul>
+						</div>
+						<div class="select_box">
+							<input type="hidden" name="month" value="{$birthArray[1]}">
+							<div class="top">{$birthArray[1]|default='01'}</div>
+							<ul>
+								<!-- <li class="active" data-id="01">1</li>
+								<li data-id="2">2</li> -->
+							</ul>
+						</div>
+						<div class="select_box">
+							<input type="hidden" name="day" value="{$birthArray[2]}">
+							<div class="top">{$birthArray[2]|default='01'}</div>
+							<ul>
+								<!-- <li class="active" data-id="1">1</li>
+								<li data-id="2">2</li> -->
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="box">
+					<div class="font-style">
+						<span class="no_must">毕业院校：</span>
+					</div>
+					<div class="input_box">
+						<input type="text" name="school" value="{$info['school']}">
+					</div>
+				</div>
+				<div class="box">
+					<div class="font-style">
+						<span class="must">所在地区：</span>
+						<span class="error">请选择你的所在地区</span>
+					</div>
+					<div style="margin-bottom:10px">
+						<div>
+							<div class="select_box">
+								<input type="hidden" name="province" value="{$info['user_province'] | default=0}">
+								<div class="top">{$info['province_name'] | default='请选择省 / 市'}</div>
+								<ul>
+
+									<!-- <li class="active" data-id="0">请选择省 / 市</li>
+									<li data-id="1">北京市</li> -->
+								</ul>
+							</div>
+							<div class="select_box">
+								<input type="hidden" name="city" value="{$info['user_city'] | default=0}">
+								<div class="top">{$info['city_name'] | default='请选择市'}</div>
+								<ul>
+									<!-- <li class="active" data-id="0">请选择市</li>
+									<li data-id="1">杭州市</li> -->
+								</ul>
+							</div>
+							<div class="select_box">
+								<input type="hidden" name="area" value="{$info['user_area'] | default=0}">
+								<div class="top">{$info['area_name'] | default='请选择区'}</div>
+								<ul>
+									<!-- <li class="active" data-id="0">请选择区</li>
+									<li data-id="1">拱墅区</li> -->
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="box">
+					<div class="input_box">
+						<input type="text" name="address" placeholder="建议输入详细地址" value="{$info['user_address']}"><span class="error">请输入你的详细地址</span>
+					</div>
+				</div>
+				<div class="box">
+					<div class="font-style">
+						<span class="must">个性简介：</span>
+						<span class="error">请输入你的个性简介15-300字</span>
+					</div>
+					<div class="input_box">
+						<textarea name="brief" maxlength="300" placeholder="还可以输入15-300字">{$info['abstract']}</textarea>
+					</div>
+				</div>
+				<div class="box">
+					<div class="button_box">
+						<button type="button" class="qdBtn active">确定</button>
+						<button type="button" onclick="window.parent.remtabs('{:U('')}')">取消</button>
+					</div>
+
+				</div>
+			</form>
+		</div>
+	</div>
+	<script src="__PUBLIC__/user/jq/jquery-1.11.1.min.js"></script>
+	<script src="__PUBLIC__/user/js/select.js"></script>
+	<script src="__PUBLIC__/user/js/information_basic.js"></script>
+	<script src="__PUBLIC__/user/bootstrap/js/bootstrap.min.js"></script>
+	<script src="__PUBLIC__/user/layer/layer.js"></script>
+	<script>
+		//提交ajax 
+		function formSubmitAjax(){
+			$.ajax({
+				type:"post",
+				url:"{:U('User/Index/saveUserBasicInfo')}",
+				data:$('#form').serialize(),
+				dataType:'json',
+				success:function(data){
+					if(data.msg==1){
+						layer.msg('提交成功', {icon: 1,time:1000},function(){
+							window.parent.location.reload([true]) ;
+						});
+					}else{
+						layer.msg('提交失败', {icon: 2,time:1000});
+					}
+				},
+				error:function(msg){
+					layer.msg('提交失败', {icon: 2,time:1000});
+				} 
+			})
+		}
+  		//第三方绑定
+  		$(".dsf").on("click", ".bangding", function(event) {
+  			var type = $(this).data('type');
+      		window.parent.location.href= 'http://www.kanqiye.cn/index/user/bindauth/type/'+type;
+  		});
+  		$(".dsf").on("click", ".jiebang", function(event) {
+  			var $this = $(this);
+  			var type = $this.data('type');
+  			
+  			$.ajax({
+				type:"post",
+				url:"{:U('index/user/cancelauth')}",
+				data:{
+					type : type
+				},
+				dataType:'json',
+				success:function(data){
+					if(data.status==0){
+						layer.msg('解绑成功！', {icon: 1,time:1000},function(){
+						$this.removeClass('zhanshi');
+			  			$this.parent().find('.bangding').addClass('zhanshi');
+			  			$this.parent().find('em').text('未绑定');	
+						});
+					}else{
+						layer.msg('解绑失败', {icon: 2,time:1000});
+					}
+				},
+				error:function(data){
+					layer.msg('解绑异常', {icon: 2,time:1000});
+				} 
+			})
+
+  		});
+
+	</script>
+	<script>
+        $.get("{:U('User/Index/getProvinces')}", function(data){
+            var province=$('input[name="province"]').siblings('ul');
+            $.each(data,function(i,tiem){
+                if($('input[name="province"]').val()==tiem.code){
+                    province.append('<li class="active" data-id="'+tiem.code+'">'+tiem.name+'</li>')
+                }else{
+                    province.append('<li data-id="'+tiem.code+'">'+tiem.name+'</li>')
+                }
+            });
+        });
+        function citys(id){
+            $.get("{:U('User/Index/getCities')}", {id:id},function(data){
+                var city=$('input[name="city"]').siblings('ul');
+                city.empty();
+                $.each(data,function(i,tiem){
+                    if($('input[name="city"]').val()==tiem.code){
+                        city.append('<li class="active" data-id="'+tiem.code+'">'+tiem.name+'</li>')
+                    }else{
+                        city.append('<li data-id="'+tiem.code+'">'+tiem.name+'</li>')
+                    }
+                });
+                $('input[name="city"]').val(0);
+                $('input[name="city"]').siblings('.top').html('请选择市');
+                $('input[name="area"]').val(0);
+                $('input[name="area"]').siblings('.top').html('请选择区')
+                $('input[name="area"]').siblings('ul').empty();
+            });
+        };
+        //area
+        function areas(id){
+            $.get("{:U('User/Index/getAreas')}", {id:id},function(data){
+                var area=$('input[name="area"]').siblings('ul');
+                area.empty();
+                $.each(data,function(i,tiem){
+                    if($('input[name="area"]').val()==tiem.code){
+                        area.append('<li class="active" data-id="'+tiem.code+'">'+tiem.name+'</li>')
+                    }else{
+                        area.append('<li data-id="'+tiem.code+'">'+tiem.name+'</li>')
+                    }
+                })
+                $('input[name="area"]').val(0);
+                $('input[name="area"]').siblings('.top').html('请选择区')
+            });
+        };
+	</script>
+</body>
+</html>

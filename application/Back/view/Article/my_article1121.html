@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>看企业管理平台—我的文章</title>
+	<script src="__PUBLIC__/user/jq/jquery-1.11.1.min.js"></script>
+	<link rel="stylesheet" href="__PUBLIC__/user/bootstrap/css/bootstrap.min.css">
+	<script src="__PUBLIC__/user/bootstrap/js/bootstrap.min.js"></script>
+	<script src="__PUBLIC__/user/layer/layer.js"></script>
+	<link rel="stylesheet" href="__PUBLIC__/user/css/public.css">
+	<link rel="stylesheet" href="__PUBLIC__/user/css/myself.css">
+	<!--[if lt IE 9]>
+	    <script src="../src/bootstrap/js/html5shiv.min.js"></script>
+	    <script src=".../src/bootstrap/js/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+	<div id="kqy_main">
+		<div class="kqy_content">
+			<div class="box_head">
+				<!--<div class="td-1"><span class="sort" data-sort="1"><span>编号排序</span><span class="kqy_icon kqy_icon_up"></span></span></div>-->
+				<if condition="$sort eq 1">
+					<div class="td-1"><span class="sort" data-sort="1"><span>编号排序</span><a href="/User/Article/my_article?sort=1" class="kqy_icon kqy_icon_up"></a></span></div>
+				<else />
+					<div class="td-1"><span class="sort" data-sort="1"><span>编号排序</span><a href="/User/Article/my_article?sort=2" class="kqy_icon kqy_icon_down"></a></span></div>
+				</if>
+				<div class="td-2">视频加分</div>
+				<div class="td-3">状态</div>
+				<div class="td-4">审核结果</div>
+				<div class="td-5">系统评分</div>
+			</div>
+
+			<!--遍历-->
+			<foreach name="list" item="vo">
+			<div class="box">
+				<input type="hidden" name="id" value="1002">
+					<div class="td-1">
+						<div class="td1-top">
+							<div class="mask_img"><img src="{$vo.img}" alt="">
+								<div class="mask">
+									<a href="{$vo.article_url}" target="_blank" class="see_btn">查看文章</a>
+								</div>
+							</div>
+							<div class="title_box">
+								<div class="title_top">{$vo.title}</div>
+								<div class="title_tgenre"><span>{$vo.tgenre}</span></div>
+								<div class="title_time">发布于 {$vo.time}</div>
+							</div>
+						</div>
+					</div>
+					<div class="td-2">暂未开通</div>
+					<div class="td-3">
+						<span class="span20">
+							<span class="kqy_icon kqy_icon_audit">
+							</span>
+							<if condition="$vo.state eq 1">
+								<span>已保存</span>
+								<elseif condition="$vo.state eq 2" />
+								<span>发布中</span>
+								<elseif condition="$vo.state eq 3" />
+								<span>已审核</span>
+							</if>
+						</span>
+					</div>
+
+				<if condition="$vo.result eq 1">
+					<div class="td-4"><span class="span20"><span class="kqy_icon kqy_icon_wait"></span><span>待审核</span></span>
+						<div class="reply_content" title="后台返回">后台返回</div>
+					</div>
+					<elseif condition="$vo.result eq 2" />
+					<div class="td-4"><span class="span20"><span class="kqy_icon kqy_icon_no"></span><span>发布失败</span></span>
+						<div class="reply_content" title="1">{$vo.result_reply}</div>
+					</div>
+					<elseif condition="$vo.result eq 3" />
+					<div class="td-4"><span class="span20"><span class="kqy_icon kqy_icon_wait"></span><span>未审核</span></span>
+						<div class="reply_content" title="后台返回">后台返回</div>
+					</div>
+					<else />
+					<div class="td-4"><span class="span20"><span class="kqy_icon kqy_icon_yes"></span><span>发布成功</span></span>
+						<div class="reply_content" title="审核通过！">审核通过！</div>
+					</div>
+				</if>
+
+					<!--<div class="td-4"><span class="span20"><span class="kqy_icon kqy_icon_no"></span><span>发布失败</span></span>-->
+						<!--<div class="reply_content" title="1">1</div>-->
+					<!--</div>-->
+					
+					<!--
+					<div class="td-4"><span class="span20"><span class="kqy_icon kqy_icon_yes"></span><span>发布成功</span></span>
+						<div class="reply_content" title="审核通过！">审核通过！</div>
+					</div>
+					<div class="td-4"><span class="span20"><span class="kqy_icon kqy_icon_wait"></span><span>待审核</span></span>
+						<div class="reply_content" title="后台返回">后台返回</div>
+					</div>
+					<div class="td-4"><span class="span20"><span class="kqy_icon kqy_icon_wait"></span><span>未审核</span></span>
+						<div class="reply_content" title="后台返回">后台返回</div>
+					</div>
+					-->
+					
+					<div class="td-5">
+						<div class="fraction">{$vo.score}分</div>
+						<div class="reply_content" title=""></div>
+						<div class="edit_content">
+							<a href="{$vo.url}" class="edit" data-url="{$vo.dataUrl}" data-text="编辑文章"><span class="kqy_icon kqy_icon_edit">编辑</span></a>
+							<a href="" class="remove lr"><span class="kqy_icon kqy_icon_remove"></span></a>
+						</div>
+					</div>
+				</div>
+			</foreach>
+			<!--/遍历-->
+
+		</div>
+		<!--分页放此标签内-->
+		<div>{$show}</div>
+		<!--/分页放此标签内-->
+		
+		
+		<!--		
+		<div id="page">
+		</div>
+		-->
+	</div>
+	<script src="__PUBLIC__/user/js/my_article.js"></script>
+	<script src="__PUBLIC__/user/js/kqy_paging.js"></script>
+	<script>
+		//修改顺序
+		function ajaxSort(val,_this){
+			var id=_this.parents('.box').find('input[name="id"]').val();
+			$.ajax({
+				type:"post",
+				url:'{:U('sort')}',
+				data:{val:val,id:id},
+				dataType:'json',
+				success:function(data){
+					if(data.msg==1){
+						layer.msg('修改成功', {icon: 1,time:1000})
+						_this.prop('readonly',true);
+					}else{
+						layer.msg('提交失败', {icon: 2,time:1000});
+					}
+				},
+				error:function(msg){
+					layer.msg('提交失败', {icon: 2,time:1000});
+				} 
+			})
+		};
+		//删除文章
+		function ajaxRemove(id,_this){
+			$.ajax({
+				type:"post",
+				url:'{:U('delete')}',
+				data:{id:id},
+				dataType:'json',
+				success:function(data){
+					if(data.msg==1){
+						layer.msg('删除成功', {icon: 1,time:1000},function(){
+							ajaxPage(PAGING);
+						})
+					}else{
+						layer.msg('删除失败', {icon: 2,time:1000});
+					}
+				},
+				error:function(msg){
+					layer.msg('删除失败', {icon: 2,time:1000});
+				} 
+			})
+		};
+		//分页
+		var isClick = true;
+		function ajaxPage(page){
+			if(!isClick) return;
+			isClick = false;
+			PAGING=page;
+			var sum=5;
+			$.ajax({
+				type:"post",
+				url:'{:U('ajaxdata')}',
+				data:{page:page,sum:5},
+				dataType:'json',
+				success:function(data){
+					isClick = true;
+					if(data.msg==1){
+						if(data.data.length==0){
+							location.reload();
+						}else{
+							pages(page,sum,data.count);
+							domModify(data.data);
+						}
+					}else{
+						layer.msg('加载失败', {icon: 2,time:1000});
+					}
+				},
+				error:function(msg){
+					layer.msg('加载失败', {icon: 2,time:1000});
+				} 
+			})
+		};
+		ajaxPage(PAGING);
+		//排序
+		$('.sort').on('click',function(){
+			return false;
+			var _this=$(this)
+			var sort=_this.attr('data-sort');
+			$.ajax({
+				type:"post",
+				url:'../php/data.php',
+				data:{sort:sort},
+				dataType:'json',
+				success:function(data){
+					if(data.msg==1){
+						if(sort==1){
+							_this.attr('data-sort',2);
+							_this.find('.kqy_icon').addClass('kqy_icon_down')
+						}else{
+							_this.attr('data-sort',1);
+							_this.find('.kqy_icon').removeClass('kqy_icon_down')
+						};
+						ajaxPage(1);
+					}else{
+						layer.msg('加载失败', {icon: 2,time:1000});
+					}
+				},
+				error:function(msg){
+					layer.msg('加载失败', {icon: 2,time:1000});
+				} 
+			})
+		})
+	</script>
+</body>
+</html>

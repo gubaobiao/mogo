@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf8">
+    <title>中国综合搏击资讯网-视频-UFC-MMA-综合格斗网</title>
+    <meta name="description" content="综合搏击资讯网站,在线视频,无广告无需VIP,UFC视频全集,拳击,昆仑决赛事视频,MMA综合视频,拳击视频资讯,散打自由搏击泰拳">
+    <meta name="keywords" content="UFC视频,泰拳视频,散打泰拳视频,MMA视频,散打比赛视频,自由搏击视频">
+    <link rel="stylesheet" type="text/css" href="/static/Index/css/home.css">
+    <link rel="stylesheet" type="text/css" href="/static/Index/css/header.css">
+    <link rel="stylesheet" type="text/css" href="/static/Index/css/footer.css">
+    <link rel="stylesheet" href="/static/Index/css/zzsc1.css">
+     <script src="/static/Index/js/jquery-1.11.1.min.js"></script>
+    <script src="/static/Index/js/jquery-ui.min.js"></script>
+    </script><script type="text/javascript" src="/static/Index/js/rich_ex.js"></script>
+    <script type="text/javascript" async="" src="/static/Index/js/pr.js"></script>
+    </script><script src="/static/Index/js/jgai.js" type="text/javascript"></script>
+    <style type="text/css">
+        a {
+             color: #fff;
+             text-decoration:none;
+        }
+        #homeleft{
+            float: left;
+            width: 48%;
+            /*background: red;*/
+        }
+         #homeright{
+            width: 45%;
+           /* background: blue;*/
+             float: right;
+             margin-right: 30px;
+        }
+        
+    </style>
+    
+    </head>
+
+
+
+
+
+<body>
+<div id="content">
+
+ {include file="Common/nav"/}
+    <div id="homepage">
+       
+
+        <div class="bottom-section container">
+            <div class="top-banner-ad">
+
+
+                <div align="center">
+
+                   <!--  <div id="_hyk23i80nxw" style=""><div style="padding-bottom:0px;"><div><div><iframe width="1000" frameborder="0" height="108" scrolling="no" src="/static/Index/js/s(1).html"></iframe></div></div></div></div><script type="text/javascript" src="/static/Index/js/kfxlecnbcimhnlou.js.下载"></script>
+ -->
+                </div>
+
+            </div>
+            <div class="box-bd">
+                <div id="must-see-video-title" class="module-title-bar"><a href="/ufc.html">UFC比赛视频 [精选] 更多> </a></div>
+                <ul class="mod-pic">
+                    {volist  name="ufcvideo" id="vo"}
+                   
+                    <li><a href="/video/{$vo.id}.html" target="_blank" alt="{$vo.video_title}" title="{$vo.video_title}"> <img src="{$vo.imgpath}" alt="{$vo.video_title}" title="{$vo.video_title}">
+                    <!-- <span>{$vo.addtime|date="y-m-d",###}</span> -->
+                    <em>
+                    {if condition="(48 <  mb_strlen($vo.video_title)   )"}
+                    {$vo.video_title |mb_substr=0,48,'utf-8'}......
+                    {else /}
+                     {$vo.video_title}
+                    {/if}
+                    </em></a></li>
+                    {/volist}
+                </ul></div>
+
+
+
+            <div class="box-bd">
+                <div id="must-see-video-title" class="module-title-bar"><a href="/wwe.html">WWe视频 更多> </a></div>
+                <ul class="mod-pic">
+                    {volist name="kovideo" id="vo"}
+                    <li><a href="/video/{$vo.id}.html" target="_blank" alt="{$vo.video_title}" title="{$vo.video_title}"> <img src="{$vo.imgpath}" alt="{$vo.video_title}" title="{$vo.video_title}">
+                    <!-- <span>{$vo.addtime|date="y-m-d",###}</span> -->
+                    <em>
+                    {if condition="(48 <  mb_strlen($vo.video_title)   )"}
+                    {$vo.video_title |mb_substr=0,48,'utf-8'}......
+                    {else /}
+                     {$vo.video_title}
+                    {/if}
+                    </em></a>
+
+                    </li>
+                    {/volist}
+                </ul>
+                </div>
+             <div class="top-section container">
+           <!--  <div class="top-banner">
+                <div class="top-banner-ad">
+
+
+
+                    <div class="a_menu">
+
+                        <div align="center">
+
+
+                            <div id="_bfdn2pt4tbs"><div id="gkpbmlx" style="padding:0px;"><div id="cgcpwvzusy">
+                                <iframe width="1000" frameborder="0" height="108" scrolling="no" src="/static/Index/js/s.html"></iframe>
+                            </div></div></div><script type="text/javascript" src="/static/Index/js/kfxlecnbcimhnlou.js"></script>
+
+                        </div>
+
+
+                    </div>
+                </div>
+
+            </div> -->
+            <div class="top-section-inner">
+                <div id="front-page-features" class="module ">
+                    <!--幻灯片开始-->
+                    <div class="h350">
+                       <div id="homeleft">
+                        <div>
+                        <div id="headlines" class="module gradient-module">
+                            <ul id="headline-tabs" class="nav nav-tabs">
+                                <li class="headline-tab active">
+                                    <a href="http://www.vs.cm/news" data-toggle="tab">UFC新闻资讯</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="headline">
+                                    <div id="headlineArticles" class="news-articles">
+                                        <ul id="headlineNewsList">
+
+                                            {volist name="ufcnews" id="vo"}
+                                            <li>
+                                                <a class="news-title" href="/news/{$vo.id}.html" target="_blank" title="{$vo.title}">[{$vo.addtime|date='Y-m-d',###}] {$vo.title}</a>
+                                            </li>
+                                            {/volist}
+                                        </ul>
+
+                                        <div class="headlines-bottom">
+
+                                            <a href="/ufcnews.html" class="headlineArticlesMore">
+                                                更多新闻 &gt;&gt;
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                        </div>
+                       </div>
+                       <div id="homeright">
+                           <div>
+                        <div id="headlines" class="module gradient-module">
+                            <ul id="headline-tabs" class="nav nav-tabs">
+                                <li class="headline-tab active">
+                                    <a href="http://www.vs.cm/news" data-toggle="tab">UFC拳手排行榜</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="headline">
+                                    <div id="headlineArticles" class="news-articles">
+                                        <ul id="headlineNewsList">
+                                          
+                                            {volist name="person" id="vo"}
+                                            <li>
+                                                <a class="news-title" href="/person/{$vo.id}.html" target="_blank" title="{$vo.username}">{$vo.username}</a>
+                                            </li>
+                                            {/volist}
+                                            <h3 style="color:red">UFC中国选手</h3>
+                                            {volist name="persons" id="vo"}
+                                            <li>
+                                                <a class="news-title" href="/person/{$vo.id}.html" target="_blank" title="{$vo.username}">{$vo.username}</a>
+                                            </li>
+                                            {/volist}
+                                        </ul>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                        </div> 
+                            
+                       </div>
+                    </div>
+                    <!--幻灯片结束-->
+
+                </div>
+                <div id="headlines-section">
+                    <div>
+                        <div id="headlines" class="module gradient-module">
+                            <ul id="headline-tabs" class="nav nav-tabs">
+                                <li class="headline-tab active">
+                                    <a href="http://www.vs.cm/news" data-toggle="tab">江湖资讯</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="headline">
+                                    <div id="headlineArticles" class="news-articles">
+                                        <ul id="headlineNewsList">
+
+                                            {volist name="article" id="vo"}
+                                            <li>
+                                                <a class="news-title" href="/news/{$vo.id}.html" target="_blank" title="{$vo.title}">[{$vo.addtime|date='Y-m-d',###}] {$vo.title}</a>
+                                            </li>
+                                            {/volist}
+                                        </ul>
+
+                                        <div class="headlines-bottom">
+
+                                            <a href="/jhzx.html" class="headlineArticlesMore">
+                                                更多新闻 &gt;&gt;
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                    </div>
+                </div>
+            </div>
+        </div>
+            <div class="box-bd">
+                <div id="must-see-video-title" class="module-title-bar"><span style="color: #FFFFFF"><a href="/gnss.html">国外赛事集锦 更多> </a></span>
+                </div>
+                <ul class="mod-pic">
+                    {volist name="$gnvideo" id="vo"}
+                    <li>
+                        <a href="/video/{$vo.id}.html" target="_blank">
+                            <img src="{$vo.imgpath}" alt="{$vo.video_title}" title="{$vo.video_title}">
+                            <!-- <span>{$vo.addtime|date="y-m-d",###}</span> -->
+                            <em>
+                           
+                            {if condition="(48 <  mb_strlen($vo.video_title)   )"}
+                            {$vo.video_title |mb_substr=0,19,'utf-8'}......
+                            {else /}
+                             {$vo.video_title}
+                            {/if}
+                            </em>
+                        </a>
+                    </li>
+                    {/volist}
+                    <div style="clear:both;"></div>
+                </ul>
+                </div>  
+               
+                    
+            </div>
+
+             {include file="Common/footer"/}
+
+    </div>
+</div>
+
+</div>
+    <script src="/static/Index/js/hd.js"></script>
+    <script type="text/javascript"></script>
+</body></html>

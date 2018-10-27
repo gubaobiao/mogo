@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<!-- saved from url=(0017)http://www.vs.cm/ -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf8">
+
+    <title>UFC_{$detail.username}</title>
+    <meta name="description" content="UFC拳手排行,搏击视频资讯综合网,在线视频,无广告无需VIP,UFC视频全集,拳击,昆仑决赛事视频,MMA综合视频,拳击视频资讯,散打自由搏击泰拳">
+    <meta name="keywords" content="UFC视频,泰拳视频,散打泰拳视频,MMA视频,散打比赛视频,自由搏击视频">
+    <link rel="stylesheet" type="text/css" href="/static/Index/css/home.css">
+    <link rel="stylesheet" type="text/css" href="/static/Index/css/header.css">
+    <link rel="stylesheet" type="text/css" href="/static/Index/css/footer.css">
+    <link rel="stylesheet" type="text/css" href="/static/Index/css/index.css">
+    <link rel="stylesheet" type="text/css" href="/static/Index/css/player.css">
+    <link rel="stylesheet" href="/static/Index/css/zzsc1.css">
+    <script src="/static/Index/js/hm.js"></script>
+    </script><script type="text/javascript" src="/static/Index/js/rich_ex.js"></script>
+    <script type="text/javascript" async="" src="/static/Index/js/pr.js"></script>
+    <script src="/static/Index/js/k.asp.js">
+    </script><script src="/static/Index/js/jgai.js" type="text/javascript"></script>
+    <script src="/static/Index/js/hd.js" type="text/javascript"></script>
+    <style type="text/css">
+        a{
+            text-decoration: none;
+            color: black;
+
+        }
+        a:hover{color:red;}
+        body{
+             background: white;
+        }
+		#video{
+			
+			width: 1004px;
+			height: 560px;
+			/*background: blue;*/
+			margin:auto;
+            /*margin-top: 30px;*/
+            margin-bottom: 80px;
+		}
+        #title{
+            width: 1004px;
+            height: 80px;
+            margin:auto;
+            background: white;
+        }
+        .videonav{
+            width: auto;
+            height: 40px;
+            line-height: 40px;
+            padding-left: 10px;
+        }
+        .videodes{
+            color: red;
+            text-align:right;
+            margin-top: 10px;
+            margin-right: 10px;
+        }
+        .videonavl{
+            float: left;
+        }
+        .videonavr{
+             float: right;
+             margin-right: 10px;
+        }
+        #clear{
+            clear: both;
+        }
+    </style>
+   </head>
+<body>
+<div id="content">
+
+         {include file="Common/nav" /}
+
+       
+	<div class="ufc-xsxq">
+    <h3 class="xsxq-tit">选手信息</h3>
+    <div class="xsxq-con">
+    <div class="con-xstx"><img src="{$detail.imgpath}"></div>
+    <div class="con-xsxx">
+        <h3 class="xsxx-name">{$detail.username}</h3>
+        <ul>
+            <li><span>国家：{$detail.country}</span></li>
+            <li><span>年龄：{$detail.age}</span></li>
+                        <li><span>身高：{$detail.height}</span></li>
+                                    <li><span>体重：{$detail.weight}</span></li>
+                        <li><span>战绩：{$detail.record}</span></li>
+            <li><span>优势：{$detail.advantage}</span></li>
+        </ul>
+    </div>
+    </div>
+
+
+
+    <dl class="xsxq-mark" style="display:none;">
+        <dd><a href="javascript:;">新闻</a></dd>
+        <dd><a href="javascript:;" class="mkon">图片</a></dd>
+        <dd><a href="javascript:;">视频</a></dd>
+    </dl>
+</div>
+
+      
+        {include file="Common/footer"/}
+    <!-- <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?34e1317f0014e85a9bbb65e636d6e48a";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script> -->
+
+    <!-- <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?23d5da3923987c7d7f21afb3ae1bb3ad";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script> -->
+
+
+</div>
+<script type="text/javascript">
+function click(id,type){
+    $.ajax({
+        type: 'get',
+        url: "{$Think.config.host}/click",
+        data: {
+            id:id,
+            type:type
+        },
+        dataType: 'json',
+        success: function(data){
+            //console.log('Ajaxhits成功');
+        },
+        error:function(data){
+            //console.log('Ajaxhits异常！');
+        }
+    });
+}
+var id=$('#videoid').val();
+window.onload=click(id,1);
+</script>
+</body></html>

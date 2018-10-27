@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>看企业管理平台—修改头像</title>
+	<script src="__PUBLIC__/user/jq/jquery-1.11.1.min.js"></script>
+	<link rel="stylesheet" href="__PUBLIC__/user/jq/amazeui.min.css">
+	<link rel="stylesheet" href="__PUBLIC__/user/jq/amazeui.cropper.css">
+	<link rel="stylesheet" href="__PUBLIC__/user/jq/custom_up_img.css">
+	<link rel="stylesheet" href="__PUBLIC__/user/bootstrap/css/bootstrap.min.css">
+	<script src="__PUBLIC__/user/bootstrap/js/bootstrap.min.js"></script>
+	<script src="__PUBLIC__/user/layer/layer.js"></script>
+	<link rel="stylesheet" href="__PUBLIC__/user/css/public.css">
+	<link rel="stylesheet" href="__PUBLIC__/user/css/information_portrait.css">
+	<!--[if lt IE 9]>
+	    <script src="__PUBLIC__/user/bootstrap/js/html5shiv.min.js"></script>
+	    <script src="__PUBLIC__/user/bootstrap/js/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+	<div id="kqy_main">
+		<div class="kqy_title">
+			<span class="max_font_size">修改头像</span>
+			<!--<span class="font-size-m"> - </span>-->
+			<!--<span class="min_font_size">上传你的专属头像，让自己成为大家眼中的耀眼的焦点</span>-->
+		</div>
+		<div class="kqy_content">
+			<div class="box">
+				<div class="font-style">
+					<span class="button_box">
+						<button class="active up-img-touch">上传头像</button>
+					</span>
+					<span>仅支持<span class="red">JPG,JPEG,BMP,PNG</span>图片文件，且文件小于<span class="red">2M</span></span>
+				</div>
+				<div class="upload_box">
+					<div class="upload_img up-img-touch">
+						<!--图-->
+						<if condition="$image['avatar_type'] eq 0 && !empty($image['avatar'])">
+						<img src="{$Think.config.WEBSETHOST}__APP__{$image['avatar']}" id="imgs" width="100%" height="100%"/>
+						<else>
+						<img src="" id="imgs" width="100%" height="100%"/>
+						</if>
+					</div>
+					<div class="show_img">
+						<div class="img_box img_lg">
+							<div class="img_circle">
+								<if condition="$image['avatar_type'] eq 0 && !empty($image['avatar'])">
+									<img src="{$Think.config.WEBSETHOST}__APP__{$image['avatar']}" alt="">
+									<elseif condition="$image['avatar_type'] eq 1 && !empty($image['avatar'])"/>
+									<img src="http://www.spbang.cn/Public{$image['avatar']}" alt="">
+									<else/>
+									<img src="{$Think.config.WEBSETHOST}__PUBLIC__/user/img/head.png" alt="">
+								</if>
+							</div>
+					</div>
+						<div class="img_box img_sm">
+							<div class="img_circle">
+								<if condition="$image['avatar_type'] eq 0 && !empty($image['avatar'])">
+									<img src="{$Think.config.WEBSETHOST}__APP__{$image['avatar']}" alt="">
+									<elseif condition="$image['avatar_type'] eq 1 && !empty($image['avatar'])"/>
+									<img src="http://www.spbang.cn/Public{$image['avatar']}" alt="">
+									<else/>
+									<img src="{$Think.config.WEBSETHOST}__PUBLIC__/user/img/head.png" alt="">
+								</if>
+							</div>
+						</div>
+						<div class="img_box img_xs">
+							<div class="img_circle">
+								<if condition="$image['avatar_type'] eq 0 && !empty($image['avatar'])">
+									<img src="{$Think.config.WEBSETHOST}__APP__{$image['avatar']}" alt="">
+									<elseif condition="$image['avatar_type'] eq 1 && !empty($image['avatar'])"/>
+									<img src="http://www.spbang.cn/Public{$image['avatar']}" alt="">
+									<else/>
+									<img src="{$Think.config.WEBSETHOST}__PUBLIC__/user/img/head.png" alt="">
+								</if>
+							</div>
+						</div>
+						<div class="button_box">
+							<button type="button" class="qdBtn active">保存头像</button>
+							<button type="button" onclick="window.parent.remtabs('{:U('')}')">取消</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--图片上 传框-->
+	<div class="am-modal am-modal-no-btn up-frame-bj " tabindex="-1" id="doc-modal-1">
+		<div class="am-modal-dialog up-frame-parent up-frame-radius">
+			<div class="am-modal-hd up-frame-header">
+				<label>修改头像</label>
+				<a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close="">×</a>
+			</div>
+			<div class="am-modal-bd  up-frame-body">
+				<div class="am-g am-fl">
+					<div class="am-form-group am-form-file">
+						<div class="am-fl">
+							<button type="button" class="am-btn am-btn-default am-btn-sm">
+								选择要上传的文件
+							</button>
+						</div>
+						<input type="file" id="inputImage" accept="image/png,image/jpeg,image/jpeg,image/bmp">
+					</div>
+				</div>
+				<div class="am-g am-fl">
+					<div class="up-pre-before up-frame-radius">
+						<img alt="" src="" id="image">
+					</div>
+					<div class="up-pre-after up-frame-radius">
+					</div>
+				</div>
+				<div class="am-g am-fl">
+					<div class="up-control-btns">
+						<span id="up-btn-ok">确定</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<img src="" id="aaaaaaab" alt="">
+	<script src="__PUBLIC__/user/jq/amazeui.min.js" charset="utf-8"></script>
+    <script src="__PUBLIC__/user/jq/cropper.min.js" charset="utf-8"></script>
+    <script src="__PUBLIC__/user/jq/custom_up_img.js" charset="utf-8"></script>
+    <script>
+    	var imgsrc=$('.img_circle img').attr('src');
+    	$('.qdBtn').on('click',function(){
+    		var src=$('.img_circle img').attr('src');
+    		if(imgsrc==src){
+    			layer.msg('已经是最新头像,请不要重复上传', {icon: 3,time:1000});
+    			return false;
+    		}
+    		$.ajax({
+				type:"post",
+				url:"http://47.98.188.171/Api/Index/ImageUpload",
+				data:{imgs:src,type:2,modual:1},
+				dataType:'json',
+				success:function(data){
+					var id = data.id;
+					var src = data.dir;
+					$.ajax({
+						type:"post",
+						url:"{:U('User/Index/uploadAvatar')}",
+						data:{src:src,id:id},
+						dataType:'json',
+						success:function(data){
+							if(data.msg==1){
+								layer.msg('头像上传成功', {icon: 1,time:1000},function(){
+									// 关闭当前窗口
+								window.parent.remtabs('information_portrait.html');
+								});
+							}else{
+								layer.msg('头像上传失败,请重试!', {icon: 2,time:1000});
+							}
+						}
+					})
+					
+				},
+				error:function(msg){
+					layer.msg('头像上传失败,请重试!', {icon: 2,time:1000});
+				} 
+			})
+    	})
+    </script>
+</body>
+</html>

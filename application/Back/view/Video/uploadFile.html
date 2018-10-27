@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>看企业管理平台—直接上传作品</title>
+	<script src="__PUBLIC__/user/jq/jquery-1.11.1.min.js"></script>
+	<link rel="stylesheet" href="__PUBLIC__/user/jq/amazeui.min.css">
+	<link rel="stylesheet" href="__PUBLIC__/user/jq/amazeui.cropper.css">
+	<link rel="stylesheet" href="__PUBLIC__/user/jq/custom_up_img.css">
+	<link rel="stylesheet" href="__PUBLIC__/user/bootstrap/css/bootstrap.min.css">
+	<script src="__PUBLIC__/user/bootstrap/js/bootstrap.min.js"></script>
+	<script src="__PUBLIC__/user/layer/layer.js"></script>
+	<script src="__PUBLIC__/user/jq/ajaxfileupload.js"></script>
+	<link rel="stylesheet" href="__PUBLIC__/user/css/public.css">
+	<link rel="stylesheet" href="__PUBLIC__/user/css/video_upload.css">
+	<script type="text/javascript" src="__PUBLIC__/user/tailuneditor/ueditor.config.js"></script>
+    <!-- 编辑器源码文件 -->
+    <script type="text/javascript" src="__PUBLIC__/user/tailuneditor/ueditor.all.js"></script>
+    <!-- 实例化编辑器 -->
+	<!--[if lt IE 9]>
+	    <script src="__PUBLIC__/user/bootstrap/js/html5shiv.min.js"></script>
+	    <script src="__PUBLIC__/user/bootstrap/js/respond.min.js"></script>
+    <![endif]-->
+    <style>
+    	.aaa input[type=radio]{
+			display:inline-block;
+			width: 15px;
+	    	height: 15px;
+		}
+		#timer {
+	    	display: none;
+		}
+		.rt_rt_1c9ohdsjl1tgl15m11ugf1h5uivr1{
+			width: 100% !important;
+			height: 100px !important;
+			background-color: #000 !important;
+		}
+		
+	</style>
+	<link rel="stylesheet" href="__PUBLIC__/user/js/upload/up.css">
+	<script language="javascript">		
+		var ServerUrl = "http://47.97.180.227:2000/uploads";
+  	</script>
+	<script src="__PUBLIC__/user/js/upload/webuploader.js"></script>
+	<script src="__PUBLIC__/user/js/upload/md5.js"></script>
+	<script src="__PUBLIC__/user/js/upload/upload.js"></script>
+</head>
+<body>
+	<div id="kqy_main">
+		<!--<div class="kqy_title">
+			<span class="max_font_size">直接上传作品</span>
+		</div>-->
+		<form id="Formvideo" enctype="multipart/form-data" style="display: none;">
+			<input id="writetoken" name="writetoken" type="hidden" value="54c13449-495b-4a89-8e1e-a5bbb200800e"></br>
+			<input id="JSONRPC" name="JSONRPC" type="hidden" value="{'title':'标题','tag':'标签','desc':'描述'}"></br>
+			<input id="cataid" name="cataid" type="hidden" value="{$cataid}"></br>
+	        <!-- <input id="Filedata" type="file" name="Filedata" value="上传视频"/> -->
+		</form>
+		<div class="kqy_content">
+			<form action="../php/1.php" method="post" id="form">
+				<!-- <div class="video_file clearfix" style="margin-bottom: 25px;">
+					<input type="file" id="Filedata" form="Formvideo" name="Filedata" accept="video/mp4,video/swf">
+					<input type="hidden" name="video_link" value="">
+					<input type="hidden" name="swf_link" value="">
+					<input type="hidden" name="status" value="">
+					<div class="title">
+						<p class="hs-xzsp"><span>选择视频</span><span>或将视频拖放到此处</span></p>
+						<p class="f12">提供专属展示空间，4K超清无广告展播（支持mp4、mov、avi等所有视频格式，文件大小不超过500M）</p>
+					</div>
+					<div class="scz">
+						<div class="scz-name">科普发放给</div>
+						<div class="jdt-box clearfix">
+							<div class="jdt pull-left clearfix">
+								<div class="pull-left">已经上传<span id="ysc">0%</span></div>
+								<div class="pull-right">剩余<span id="sy">*</span>秒</div>
+								<div id="progressBar"></div>
+							</div>
+							<div class="shanchu pull-right"></div>
+						</div>
+						<div class="scz-status">已上传：<span id="yscm">52</span>MB/<span id="zongm">150</span>M&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;上传速度：<span id="scsd">0</span></div>
+						
+					</div>	
+				</div> -->
+
+				<div class="video_file clearfix" style="margin-bottom: 25px;">
+					<input style="display:none;" readOnly="true" type="text" name="downpath1" id="downpath1" value="" size="45">
+					<input style="display:none;" readOnly="true" type="text" name="odownpath1" id="odownpath1" value="" size="45">
+					<input style="display:none;" readOnly="true" type="text" name="erweima" id="erweima" value="" size="45">
+					<input style="display:none;" readOnly="true" type="text" name="share" id="share" value="" size="45">
+					<input style="display:none;" readOnly="true" type="text" name="playtime" id="playtime" value="" size="45">
+					<input style="display:none;" readOnly="true" type="text" name="titlepic" id="titlepic" value="" size="45">															
+										
+					<div class="shangchuan_biaodan" id="chose0">
+						<div id="chosevideo"></div>	  
+						<div id="divFileProgressContainer"></div>
+						<div class="clear"></div>
+					</div>
+
+					<div class="title">
+						<p class="hs-xzsp"><span>选择视频</span><span>或将视频拖放到此处</span></p>
+						<p class="f12">提供专属展示空间，4K超清无广告展播（支持mp4、mov、avi等所有视频格式，文件大小不超过500M）</p>
+					</div>
+					<!-- <div class="scz">
+						<div class="scz-name">科普发放给</div>
+						<div class="jdt-box clearfix">
+							<div class="jdt pull-left clearfix">
+								<div class="pull-left">已经上传<span id="ysc">0%</span></div>
+								<div class="pull-right">剩余<span id="sy">*</span>秒</div>
+								<div id="progressBar"></div>
+							</div>
+							<div class="shanchu pull-right"></div>
+						</div>
+						<div class="scz-status">已上传：<span id="yscm">52</span>MB/<span id="zongm">150</span>M&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;上传速度：<span id="scsd">0</span></div>
+						
+					</div>	 -->
+				</div>
+				<!--上传按钮-->
+				<!-- <div class="shangchuan_biaodan" id="chose0">
+					<div id="chosevideo">选择文件</div>	  
+					<div id="divFileProgressContainer"></div>
+					<div class="clear"></div>
+				</div>
+				<input style="display:hidden;" readOnly="true" type="text" name="share" id="share" value="" size="45"> -->
+				<!--/上传按钮-->
+				  
+				<div class="huise-fg"><div></div><div></div></div>
+				<div class="uplaod_img_show clearfix">
+					<div class="upload_img">
+						<input type="hidden" name="upload_img" value="">
+						<div class="mask"><img src="{$Think.config.WEBSETHOST}__PUBLIC__/user/img/rem_btn2.png" alt=""></div>
+					</div>
+					<!--<span class="up-img-touch">编辑封面（16/9）</span>-->
+					<div class="hs-img-text pull-left clearfix">
+						<span class="hongdian hongdian0 pull-left"></span>
+						<p class="pull-left">请勿上传待水印的作品，片中带水印将无法通过审核，署名可以添加在片尾（平台已实现作品防下载，防盗）</p>
+					</div>
+					<div class="scfm-error pull-left">
+						<span class="error">必须填！</span>
+					</div>
+				</div>
+				<div class="clear"></div>
+				
+				<div class="box box-spbt">
+					<div class="font-style clearfix">
+						<span class="error pull-right">必须填！</span>
+					</div>
+					<div class="input_box hs-spbt">
+						<span class="hongdian hongdian1"></span><input type="text" maxlength="60" class="hs-spbt-input" name="video_title" placeholder="请输入视频标题"><span class="spbt-zs"><em class="spbt-zs-num">0</em>/60</span>
+					</div>
+				</div>
+				
+				<div class="wid520 box-spjj pull-right">
+					<div class="font-style clearfix">
+						<span class="error pull-right">必须填！</span>
+					</div>
+					<div class="input_box">
+						<span class="hongdian hongdian1"></span>
+						<textarea class="spjj-textarea" name="video_brief" onkeydown="spjjZs(this)" onkeyup="spjjZs(this)" placeholder="输入视频相关简介（请勿填写广告）"></textarea>
+						<span class="spjj-zs"><em class="spjj-zs-num">0</em>/200</span>
+					</div>
+				</div>
+				
+				<div class="box wid150 sel-lx">
+					<span class="hongdian hongdian3"></span>
+					<div class="input_box">
+						<div class="select_box">
+							<input type="hidden" name="genre" value="0">
+							<div class="top menu_start" style="position: relative; width: 110%;">请选择类型</div>							
+							<div class="top_menu">
+									<!-- <div class="tm_first">111</div> -->
+									<foreach name="cate" item="catelist"> 
+									<div  data-id="{$catelist.id}"
+									 <if condition="$catelist['csum'] eq 0">class="tm_second"<else/>class="tm_first"</if>>{$catelist.catename}</div>
+									</foreach>
+								</div>
+								<div class="top_menu1">
+								</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="box wid150 sel-hy">
+					<div class="input_box">
+						<div class="select_box">
+							<input type="hidden" name="trade" value="0">
+							<div class="top">请选择行业</div>
+							<ul>
+							<foreach name="industy" item="inlist">
+								<li data-id="{$inlist.id}">{$inlist.industryname}</li>
+							</foreach>
+							</ul>
+						</div>
+					</div>
+				</div>
+				
+				<div class="box wid150 font-style sel-error">
+					<span class="error">必须填！</span>
+				</div>
+				
+				<div class="clear"></div>
+				<!--
+				<div class="box wid520" style="width: auto;min-width: 520px;">
+					<div class="font-style">
+						<span class="must">视频标签（标签与标签用空格分割）：</span>
+						<span class="error">视频标签不能为空且3-12个字，最多3个，空格分隔！</span>
+					</div>
+					<div class="input_box">
+						<input type="hidden" name="video_label" value="{$data['label']}" placeholder="视频标签3-12个字，最多3个，空格分隔">
+						<div class="video_labels" style="width: auto;min-width: 520px;">
+							<div class="bel" style="margin-left: 15px;"></div>	
+							<div class="bels">
+								<input type="text" class="inputbel" placeholder="空格分隔">
+							</div>
+							
+						</div>
+						<span class="video_label">阿里巴巴十周年</span>
+						<span class="video_label">淘宝网拍摄花絮</span>
+						<span class="video_label">pr剪辑教程</span>
+					</div>					
+				</div>
+				-->
+				<!--标签-->
+				<div class="bq-box pull-left clearfix">
+					<span class="hongdian hongdian4"></span>
+					<div class="bq-input-box pull-left">
+						<input type="hidden" class="hs-video_label" name="video_label" value="">
+						<input type="text" name="" class="bq-input" placeholder="视频标签，按空格添加，如XX宣传片"/>
+						<span class="bq-gs"><em class="bq-gs-num">0</em>/3</span>
+					</div>
+					<span class="error pull-left">必须填！</span>
+				</div>
+				<!--/标签-->
+				<div class="input_box pull-right sfbz">
+					<input type="number" name="video_sum" placeholder="该视频收费标准为xx元？">
+				</div>
+				
+				<div class="clear"></div>
+				<!--标签列表-->
+				<div class="bq-list">
+					<!--<span>哈哈哈哈哈<em class="bq-del"></em></span>-->
+				</div>
+				<!--/标签列表-->
+				
+				
+				<div class="clear"></div>
+				<!--<div class="box">
+					<div class="font-style">
+						<span class="no_must">作品费用(元)：</span>
+						<span class="error">费用必须大于500，小于9999999</span>
+					</div>
+					<div class="input_box">
+						<input type="number" min="500" max="9999999" name="video_sum" placeholder="如果有客户想拍同样的，您期望费用为？">
+					</div>
+				</div>-->
+				<div class="clear"></div>
+				<div class="box spxq">
+					<span class="hongdian hongdian5"></span>
+					<div class="font-style">
+						<span class="spxq-title">视频详情：</span>
+						<span>请勿填写广告</span>
+						<span class="spxq-error error">必填项！</span>
+					</div>
+					<div class="input_box">
+						<script id="container" name="content" type="text/plain"></script>
+					</div>
+				</div>
+				<div class="clear"></div>
+				<if condition="$timer">{$timer}</if>
+				<div class="huise-fg"><div></div><div></div></div>
+				<div class="video_button clearfix">
+					<div class="box button_box">
+						<input type="hidden" name="type" value="">
+						<button type="button" data-type="2" class="blholdBtn hold">保存暂不发布</button>
+						<button type="submit" data-type="1" class="blqdBtn active">提交官方审核</button>
+						<!--<button type="button" onclick="javascript:history.back(-1)">取消</button>-->
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+	<!--图片上传框-->
+	<div class="am-modal am-modal-no-btn up-frame-bj " tabindex="-1" id="doc-modal-1">
+		<div class="am-modal-dialog up-frame-parent up-frame-radius">
+			<div class="am-modal-hd up-frame-header">
+				<label>上传封面</label>
+				<a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close="">×</a>
+			</div>
+			<div class="am-modal-bd  up-frame-body">
+				<div class="am-g am-fl">
+					<div class="am-form-group am-form-file">
+						<div class="am-fl">
+							<button type="button" class="am-btn am-btn-default am-btn-sm">
+								选择要上传的图片
+							</button>
+						</div>
+						<input type="file" id="inputImage" accept="image/png,image/jpeg,image/jpeg,image/bmp">
+					</div>
+				</div>
+				<div class="am-g am-fl">
+					<div class="up-pre-before up-frame-radius">
+						<img alt="" src="" id="image">
+					</div>
+					<div class="up-pre-after up-frame-radius">
+					</div>
+				</div>
+				<div class="am-g am-fl">
+					<div class="up-control-btns">
+						<span id="up-btn-ok">确定</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	 <!--自定义取消提醒弹框-->
+    <section class="custom-edit myDialog">
+        <div class="custom-two">
+            <p>确定取消本次上传的视频吗？</p>
+            <span>我想上传别的视频或重新上传该视频</span>
+        </div>
+        <div class="custom-three">
+            <button class="btn btn-default custom-cancel">取消</button>
+            <button class="btn btn-warning custom-confirm">确定</button>
+        </div>
+    </section>
+	<!--自定义取消提醒弹框-->
+	
+	<script src="__PUBLIC__/user/jq/amazeui.min.js" charset="utf-8"></script>
+    <script src="__PUBLIC__/user/jq/cropper.min.js" charset="utf-8"></script>
+    <script src="__PUBLIC__/user/jq/custom_up_img_16_9.js" charset="utf-8"></script>
+	<script src="__PUBLIC__/user/js/select.js" charset="utf-8"></script>
+    <script src="__PUBLIC__/user/js/video_upload.js"></script>
+    <script src="__PUBLIC__/user/laydate/laydate.js"></script>
+    <script>
+
+		$('.menu_start').click(function(){
+			$(".top_menu").toggle();
+		});
+
+		$('.tm_first').click(function(){
+			var id = $(this).attr('data-id');
+			$('.top_menu1').empty();
+			
+			$.ajax({
+				type:"post",
+				url:'{:U('User/Video/vcateajax')}',
+				data:{id:id},
+				dataType:'json',
+				success:function(data){
+					console.log(data);
+					for(var i=0;i<data.data.length;i++){
+						var html = '';
+						html += '<div class="tm_second" data-id="' + data.data[i].id + '">' + data.data[i].catename + '</div>';
+						$('.top_menu1').append(html);
+					}
+				}
+			});
+			$('.top_menu1').show();
+		})
+
+		$('.select_box').on("click",".tm_second",function(){  
+			var cont = $(this).html();
+			var id = $(this).attr('data-id');
+    		$('.top_menu').hide();
+			$('.top_menu1').hide();
+			$('.menu_start').html(cont);
+			$("input[name='genre']").val(id);
+		}); 
+		
+		$('.open_lj').click(function(){
+			$('.lianjie').show();
+		});
+		$('.close_lj').click(function(){
+			$('.lianjie').hide();
+		});
+		$('#test').click(function(){
+			alert($('#form').serialize());
+		})
+
+
+    	var isFlog = true;
+    	//上传
+    	function formSubmitAjax(_this){
+			var imgs = $('input[name="upload_img"]').val();
+			console.log(imgs);
+    		if(isFlog){
+    			isFlog = false;
+    			var type=$(_this).attr('data-type'), lady;
+	    		$('input[name="type"]').val(type);
+				// lady = layer.load();
+				$.ajax({
+					type:"post",
+					url:'http://47.98.188.171/Api/Index/ImageUpload',
+					data:{imgs:imgs,type:2,modual:1},
+					dataType:'json',
+					success:function(data){
+						$('input[name="upload_img"]').val(data.dir);
+						$.ajax({
+							type:"post",
+							url:'{:U('uploadFile')}',
+							data:$('#form').serialize(),
+							dataType:'json',
+							success:function(data){
+								// layer.close(lady);
+								if(data.msg==1){
+									layer.msg('提交成功,请耐心等待官方的审核！', {icon: 1,time:3000},function(){
+										window.parent.tabs('{:U('User/Video/myVideos')}','{:U('User/Video/myVideos')}','我的视频');
+										window.parent.remtabs('{:U('User/Video/uploadVideo')}');
+									});
+								}else if(data.msg == 3){
+									layer.msg('保存成功！', {icon: 1,time:3000},function(){
+										window.parent.tabs('{:U('User/Video/myVideos')}','{:U('User/Video/myVideos')}','我的视频');
+										window.parent.remtabs('{:U('User/Video/uploadVideo')}');
+									});
+								}else{
+									isFlog = true;
+									layer.msg('提交失败', {icon: 2,time:1000});
+								}
+							},
+							error:function(msg){
+								layer.msg('提交失败', {icon: 2,time:1000});
+							} 
+						})
+					}
+				})
+				
+    		}
+		};
+      //删除视频
+        function removeUpload(par,url){
+			//var img=par.find('.img_s');
+			//hs0113
+			var par=$('.video_file');
+			
+			var video_file=par.find('input[name="video_link"]')
+			var swf_link=par.find('input[name="swf_link"]')
+			var status=par.find('input[name="status"]')
+			var file=par.find('input[type="file"]');
+			var f24=par.find('.f24');
+        	$.ajax({
+				type:"post",
+				url:'{:U('User/Video/deleteVideo')}',
+				data:{vid:video_file.val()},
+				dataType:'json',
+				success:function(data){
+					if(data.error==0){
+						//img.hide();
+						$('.scz').hide();
+						
+						video_file.val('');
+						swf_link.val('');
+						status.val('');
+						file.val('');
+						f24.html('上传视频')
+						layer.msg('删除成功', {icon: 1,time:1000});
+					}else{
+						layer.msg('删除失败', {icon: 2,time:1000});
+					}
+					//hs0113
+					layer.closeAll(); 
+	        		$('.myDialog').hide();
+				},
+				error:function(msg){
+					layer.msg('删除失败', {icon: 2,time:1000});
+					//hs0113
+					layer.closeAll(); 
+	        		$('.myDialog').hide();
+				} 
+			})
+        }
+        //删除按钮
+       /* 
+		$('.video_file').hover(function(){
+			if($(this).find('input[type="hidden"]').val()!=''){
+				$('.img_rem').show();
+			}
+		},function(){
+			$('.img_rem').hide();
+		});
+		*/
+		/*
+		$('.img_rem').on('click',function(){
+			var par=$(this).parents('.video_file');
+			var url=$('input[name="video_link"]').val();
+			var swf=$('input[name="swf_link"]').val();
+			var status=$('input[name="status"]').val();
+			layer.msg('是否删除视频？',{time: 0,
+				area : ['250px' ,'100px'],
+				btn: ['确定', '取消'],
+				yes: function(index){
+					removeUpload(par,url)
+					removeUpload(par,swf_link)
+					removeUpload(par,status)
+				},
+			})
+		});
+		*/
+		$('.shanchu').on('click',function(){
+			layer.open({
+	            title :'取消提醒',
+	            type: 1,
+	            area: '428px',
+	            content: $('.custom-edit'),
+	            cancel:function(index,layero){
+	                $(layero).find('.custom-edit').hide();
+	            }
+	        });
+		});
+		//关闭所有模态框
+    	$(document).on('click','.custom-cancel',function(){
+	        layer.closeAll(); 
+	        $('.myDialog').hide();
+	    });
+		//确定删除上传视频
+    	$(document).on('click','.custom-confirm',function(){
+	       if(success_flag=='1'){
+				//上传成功
+				var par=$(this).parents('.video_file');
+				var url=$('input[name="video_link"]').val();
+				var swf=$('input[name="swf_link"]').val();
+				var status=$('input[name="status"]').val();
+				
+				//removeUpload(par,url)
+				removeUpload('','')
+				
+			}else{
+				//上传中
+				xhr.abort();
+				$('.scz').hide();
+				$('#Filedata').val('');
+				console.log(23);
+			}
+			layer.closeAll(); 
+	        $('.myDialog').hide();
+	    });
+		
+		
+		
+    </script>
+	<script  type="text/javascript">
+    	var xhr;
+    	var ot;//
+        var oloaded;
+        //上传成功标示
+        var success_flag = 0;
+    	
+		function postVedio(){
+            var form = new FormData();
+			var writetoken=$("#writetoken").val();
+			var JSONRPC=$("#JSONRPC").val();
+			var fileObj = document.getElementById("Filedata").files[0]; 
+			var cataid=$("#cataid").val();
+            form.append("writetoken", writetoken);          
+			form.append("JSONRPC",JSONRPC);                 
+            form.append("Filedata", fileObj);  
+			form.append("cataid", cataid);
+            xhr = new XMLHttpRequest();
+			xhr.upload.addEventListener("progress", uploadProgress, false); 
+            xhr.open("post", "http://v.polyv.net/uc/services/rest?method=uploadfile", true);
+            xhr.onload = function () {
+            var jsonObject=JSON.parse(xhr.response);
+                if(jsonObject.error==0)
+				{
+					$('#scsd').text('0k/s');
+					success_flag = 1;
+					
+					layer.msg('上传成功', {icon: 1,time:1000},function(){
+						$('.video_file .img_s').show();
+						$('input[name="video_link"]').val(jsonObject.data[0].vid)
+						$('input[name="swf_link"]').val(jsonObject.data[0].swf_link)
+						$('input[name="status"]').val(jsonObject.data[0].status)
+					});
+				}
+				else
+				{
+					layer.msg('上传失败', {icon: 2,time:1000});
+					$(".title .f24").html('上传失败')
+				}
+            };
+            
+            //0112
+            //上传开始执行方法
+            xhr.upload.onloadstart = function(){
+            	//设置上传开始时间
+                ot = new Date().getTime();  
+                //设置上传开始时，以上传的文件大小为0
+                oloaded = 0;
+            };
+            
+            xhr.send(form);
+		}	
+		 function uploadProgress(evt){ 
+	       	if (evt.lengthComputable) {   
+		        //evt.loaded：文件上传的大小 evt.total：文件总的大小   
+				//console.log(evt);
+		        var percentComplete = Math.round((evt.loaded) * 100 / evt.total); 
+		        //加载进度条，同时显示信息  
+		        //$(".title .f24").html(percentComplete + '%') ;
+				//0112
+		        $("#ysc").html(percentComplete + '%') ;
+		        $("#yscm").html((evt.loaded/1024/1024).toFixed(1)) ;
+		        $("#zongm").html((evt.total/1024/1024).toFixed(1)) ;
+				$("#progressBar").width(percentComplete + '%');
+		  	}
+	
+			//计算网速等0112
+            var nt = new Date().getTime();//获取当前时间
+            var pertime = (nt-ot)/1000;  //计算出上次调用该方法时到现在的时间差，单位为s
+            ot = new Date().getTime(); //重新赋值时间，用于下次计算
+            
+            var perload = evt.loaded - oloaded; //计算该分段上传的文件大小，单位b       
+            oloaded = evt.loaded;//重新赋值已上传文件大小，用以下次计算
+        
+            //上传速度计算
+            var speed = perload/pertime; //单位b/s
+            var bspeed = speed;
+            var units = 'b/s';//单位名称
+            if(speed/1024>1){
+                speed = speed/1024;
+                units = 'k/s';
+            }
+            if(speed/1024>1){
+                speed = speed/1024;
+                units = 'M/s';
+            }
+            speed = speed.toFixed(1);
+            //剩余时间
+            var resttime = ((evt.total-evt.loaded)/bspeed).toFixed(1);
+            $('#sy').text(resttime);
+            $('#scsd').text(''+speed+units);
+            
+		 }
+		$('#Filedata').change(function(){
+			if($(this).val()==''){return};
+			//debugger
+			var size = document.getElementById("Filedata").files[0].size; 
+			var name = document.getElementById("Filedata").files[0].name; 
+			 //console.log(size);
+			 if(size>500*1024*1024){
+			 	return layer.msg('视频大小不能超过500M', {icon: 2,time:1000});
+			 }
+			 
+			 //0112
+			 $('.scz').show();
+			 $('.scz-name').text(name);
+			 success_flag = 0;
+			 
+			postVedio();
+		})
+		//标签
+		var vbel="";var num=0;
+		$(".inputbel").on("focus",function(){
+			$(".video_labels").css({"border":"1px solid #FFA200"})
+		})
+		$(".inputbel").on("blur",function(){
+			vbel = "";
+			$(".video_labels").css({"border":"1px solid  #d5d5d5"})
+			for(var i= 0;i<$(".bel").find(".slabel").length;i++){
+			   vbel += $($(".bel").find(".slabel")[i]).text().trim()+" ";
+			}
+			$("input[name='video_label']").val(vbel.trim())
+		})
+		
+		$(".inputbel").on('keydown', function(event) {
+			num = $(this).val().length;//0
+		if (event.keyCode == "32") {
+			//回车执行查询
+			if($(".bel").find(".slabel").length>=3){
+				layer.msg('最多只能添加三个', {icon: 2,time:1000});
+				$(this).val("");
+			}else if($(this).val().trim().length<2||$(this).val().trim().length>12  ){
+				layer.msg('请填写标签,2-12个字', {icon: 2,time:1000});
+				$(this).val("");
+			}else{
+				var value = $(this).val();
+				$(".bel").append('<span class="video_label slabel" contenteditable="false">'+value+'</span>');
+				$(this).val("");			
+			}
+		}else if(event.keyCode == "8"){
+			if(num==0){
+				$(".bel .slabel:last-child").remove()
+			}	
+		}
+	    });	
+	    
+	    //hs0115标签空格事件
+		$(document).on('keydown',".bq-input", function(event) {
+			var $this = $(this);
+			if (event.keyCode == "32") {
+				if($('.bq-list>span').length<3){
+					$('.bq-list').append('<span>'+$this.val()+'<em class="bq-del"></em></span>');
+					$this.val('');
+					$('.bq-gs-num').text($('.bq-list>span').length);
+					setBq();
+				}else{
+					$this.val('');
+				}
+			}
+	    });	
+	    //标签删除
+	    $(document).on('click',".bq-del", function(event) {
+	    	$(this).parent().remove();
+	    	$('.bq-gs-num').text($('.bq-list>span').length);
+	    	setBq();
+	    });
+	    //填充标签隐藏域
+	    function setBq(){
+	    	var bqStr='';
+	    	$('.bq-list>span').each(function(index,e){
+	    		var $this = $(e);
+	    		bqStr +=$this .text().trim()+" ";
+	    	});
+	    	$("input[name='video_label']").val(bqStr.trim());
+	    }
+	    
+	    
+	    
+	    
+	    laydate({
+		elem: '#timer',
+		  format: 'YYYY-MM-DD hh:mm:ss', // 分隔符可以任意定义，该例子表示只显示年月
+		  festival: true, //显示节日
+		  istime: true
+		});
+
+		$('.timer').click(function(){ // 显示/隐藏选择时间插件
+			var self = $(this);
+			$(this).attr('id') == 'yes' ? $('#timer').fadeIn(200) : $('#timer').fadeOut(200);
+		})	
+</script>
+</body>
+</html>

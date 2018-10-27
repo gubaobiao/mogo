@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<!-- saved from url=(0017)http://www.vs.cm/ -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf8">
+
+    <title>{$seoTitle}</title>
+    <meta name="description" content="{$seoTitle}">
+    <meta name="keywords" content="综合搏击资讯网站,在线视频,无广告无需VIP,UFC视频全集,拳击,昆仑决赛事视频,MMA综合视频,拳击视频资讯,散打自由搏击泰拳">
+    <link rel="stylesheet" type="text/css" href="/static/Index/css/home.css">
+    <link rel="stylesheet" type="text/css" href="/static/Index/css/header.css">
+    <link rel="stylesheet" type="text/css" href="/static/Index/css/footer.css">
+    <link rel="stylesheet" href="/static/Index/css/zzsc1.css">
+    <link rel="stylesheet" href="/static/Index/css/nlayout.css">
+    <script src="/static/Index/js/hm.js"></script>
+    </script><script type="text/javascript" src="/static/Index/js/rich_ex.js"></script>
+    <script type="text/javascript" async="" src="/static/Index/js/pr.js"></script>
+    </script><script src="/static/Index/js/jgai.js" type="text/javascript"></script>
+    <script src="/static/Index/js/hd.js" type="text/javascript"></script>
+    <style type="text/css">
+        html body{
+            background: white;
+        }
+        a{
+            text-decoration: none;
+             color: black;
+           
+        }
+        a:hover{color:red;}
+		#video{
+			
+			width: 1004px;
+			
+			
+			margin:auto;
+            /*margin-top: 30px;*/
+            /*margin-bottom: 80px;*/
+		}
+       /* .listbox{
+           background:#FFFACD; 
+        }*/
+        #title{
+            width: 1004px;
+            height: 60px;
+            margin:auto;
+            background:white;
+        }
+        .videonav{
+            width: auto;
+            height: 40px;
+            line-height: 40px;
+            padding-left: 10px;
+        }
+        .videodes{
+           /*color: red;*/
+            text-align:center;
+            margin-top: 10px;
+            margin-right: 10px;
+        }
+        .videonavl{
+            float: left;
+        }
+        .videonavr{
+             float: right;
+             margin-right: 10px;
+        }
+        .videor{
+            float: left;
+            width: 300px;
+             
+        }
+        #clear{
+            clear: both;
+        }
+        .pagination { display: inline-block; padding-left: 0; margin: 20px 0; border-radius: 4px; }
+    .pagination li { display: inline; }
+    .pagination li a,.pagination li span { position: relative; float: left; padding: 6px 12px; margin-left: -1px; line-height: 1.428571429; text-decoration: none; background-color: #fff; border: 1px solid #ddd; }
+    .pagination li:first-child a { margin-left: 0; border-bottom-left-radius: 4px; border-top-left-radius: 4px; }
+    .pagination li:last-child a { border-top-right-radius: 4px; border-bottom-right-radius: 4px; }
+    .pagination li a:hover, .pagination li a:focus { background-color: #eee; }
+    .pagination .active span, .pagination .active span:hover, .pagination .active span:focus { z-index: 2; color: #fff; cursor: default; background-color: #428bca; border-color: #428bca; }
+    .pagination .disabled span, .pagination .disabled span:hover, .pagination .disabled span:focus { color: #999; cursor: not-allowed; background-color: #fff; border-color: #ddd; }
+    .pagination-lg li a { padding: 10px 16px; font-size: 18px; }
+    .pagination-sm li a, .pagination-sm li span { padding: 5px 10px; font-size: 12px; }
+        .pages{
+        height: 100px;
+        width: 600px;
+        margin: auto;
+        margin-top: 30px;
+    
+    }
+
+    .videor .e2 li a.preview{
+        width: 120px;
+
+    }
+    .videor .e2 li a.preview img{
+         width: 120px;
+         height: 80px;
+    }
+    .videor .e2 li a.title{
+        font-size: 9px;
+        line-height: 20px;  
+    }
+    h3{
+        margin-left:15px;
+    }
+    #clear{
+            clear: both;
+        }
+    </style>
+   </head>
+<body>
+<div id="content">
+
+         {include file="Common/nav" /}
+
+        <div id="title">
+            <div class="videonav">
+            <div class="videonavl">
+            <span>当前位置:&nbsp;</span><a href="{$Think.config.host}">首页&nbsp;</a>><a href="/{$catename.rewriteurl}.html">&nbsp;{$catename.catename}&nbsp;</a>>&nbsp;
+            </div>
+            <div class="videonavr">
+                 <span ></span>   
+            </div>
+            <div id='clear'></div>
+
+            </div>
+            
+           <!--  <div class="videodes">
+                <h3></h3>
+                <span>作者:头条号</span>&nbsp;&nbsp;&nbsp;<span>发表时间:{}</span>&nbsp;&nbsp;&nbsp;<span>浏览量:</span>
+            </div> -->
+        </div>
+		<div id="video">
+			 <div class="listbox">
+                <ul class="e2">
+                {volist name="list" id="vo"}
+                    <li>
+                        <a href="/news/{$vo.id}.html" target="_blank" class="preview"><img src="{$vo.imgpath}"></a>
+                                          <b><a href="/news/{$vo.id}.html"></a></b>
+                        <a href="/news/{$vo.id}.html" class="title" target="_blank"><b>{$vo.title}</b></a>
+                        <span class="info">
+                            <small>发布日期：</small>{$vo.addtime|date='Y-m-d H:i:s',###}
+                        </span>
+                        <p class="intro">
+                            作者:{$vo.author}  浏览量：{$vo.clilck}
+                         {if condition="(50 <  mb_strlen($vo.content)   )"}
+                         {$vo.content |strip_tags|mb_substr=0,60,'utf-8'}......
+                         {else /}
+                         {$vo.content}
+                         {/if}
+                            </p>
+                    </li>
+                {/volist}
+                </ul>
+                
+            </div>
+
+            <div class="videor">
+                        <h3>热门视频</h3>
+                        <ul class="e2">
+                         {volist name="videodata" id="vo"}
+                        <li>
+                            <a href="/video/{$vo.id}.html" target="_blank" class="preview"><img src="{$vo.imgpath}" width="120"></a>
+                                              <b><a href="/video/{$vo.id}.html"></a></b>
+                             <a href="/video/{$vo.id}.html" class="title" target="_blank"><b>{$vo.video_title}</b></a>
+                           </a>
+                            
+                            
+                        </li>
+                     {/volist}
+                     <h3>热门文章</h3>
+                     {volist name="articlet" id="vo"}
+                        <li>
+                            <a href="/news/{$vo.id}.html" target="_blank" class="preview"><img src="{$vo.imgpath}" width="120"></a>
+                                              <b><a href="/news/{$vo.id}.html"></a></b>
+                             <a href="/news/{$vo.id}.html" class="title" target="_blank"><b>{$vo.title}</b></a>
+                           </a>
+                            
+                            
+                        </li>
+                    {/volist}
+                     <h3>WWE热门视频</h3>
+                     {volist name="videow" id="vo"}
+                         <li>
+                            <a href="/video/{$vo.id}.html" target="_blank" class="preview"><img src="{$vo.imgpath}" width="120"></a>
+                                              <b><a href="/video/{$vo.id}.html"></a></b>
+                             <a href="/video/{$vo.id}.html" class="title" target="_blank"><b>{$vo.video_title}</b></a>
+                           </a>
+                            
+                            
+                        </li>
+                    {/volist}
+                    </ul>
+
+            </div>
+            <div id='clear'></div>
+            <div class="pages"><center>{$list->render()}</center></div>
+            </div>
+             
+		</div>
+</div>
+ {include file="Common/footer"/}
+<script type="text/javascript">
+function click(id,type){
+    $.ajax({
+        type: 'get',
+        url: "{$Think.config.host}/click",
+        data: {
+            id:id,
+            type:type
+        },
+        dataType: 'json',
+        success: function(data){
+            //console.log('Ajaxhits成功');
+        },
+        error:function(data){
+            //console.log('Ajaxhits异常！');
+        }
+    });
+}
+var id=$('#videoid').val();
+window.onload=click(id,1);
+</script>
+</body></html>

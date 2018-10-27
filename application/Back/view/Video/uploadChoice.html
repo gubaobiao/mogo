@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>看企业管理平台—选择视频上传类型</title>
+	<script src="__PUBLIC__/user/jq/jquery-1.11.1.min.js"></script>
+	<link rel="stylesheet" href="__PUBLIC__/user/bootstrap/css/bootstrap.min.css">
+	<script src="__PUBLIC__/user/bootstrap/js/bootstrap.min.js"></script>
+	<script src="__PUBLIC__/user/layer/layer.js"></script>
+	<link rel="stylesheet" href="__PUBLIC__/user/css/public.css">
+	<link rel="stylesheet" href="__PUBLIC__/user/css/video_upload.css">
+	<!--[if lt IE 9]>
+	    <script src="__PUBLIC__/user/bootstrap/js/html5shiv.min.js"></script>
+	    <script src="__PUBLIC__/user/bootstrap/js/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+	<div id="kqy_main">
+		<div class="kqy_title">
+			<span class="max_font_size">上传视频</span>
+			<span class="font-size-m"> - </span>
+			<span class="min_font_size">建议选择直接上传作品，平台已实现作品防下载、防盗、无广告等功能，直接上传的作品将获得权重和流量排名。!</span>
+		</div>
+		<div class="kqy_content">
+			<div class="video_upload file_upload">
+				<a href="{:U('User/Video/uploadFile')}">
+					<div><img src="{$Think.config.WEBSETHOST}__PUBLIC__/user/img/file_upload.png" alt="直接作品上传"></div>
+					<div class="upload_text">直接上传作品</div>
+					<div class="upload_content">点击进入上传视频页，进行上 传（支持mp4、mov、avi格式，文 件大小不超过3G）</div>
+				</a>
+			</div>
+			<div class="video_upload link_upload">
+				<a href="{:U('User/Video/uploadLink')}">
+					<div><img src="{$Think.config.WEBSETHOST}__PUBLIC__/user/img/link_upload.png" alt="引用视频平台作品上传"></div>
+					<div class="upload_text">引用视频平台作品</div>
+					<div class="upload_content">支持引用优酷土豆、腾讯、爱奇艺、 搜狐、乐视、56等视频</div>
+				</a>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

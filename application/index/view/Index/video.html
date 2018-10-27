@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<!-- saved from url=(0017)http://www.vs.cm/ -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf8">
+
+    <title>{$videoData.video_title}</title>
+  		
+    <meta name="description" content="{$videoData.video_brief}">
+    <meta name="keywords" content="UFC视频,泰拳视频,散打泰拳视频,MMA视频,散打比赛视频,自由搏击视频">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <link rel="stylesheet" type="text/css" href="/static/Index/css/home.css">
+    <link rel="stylesheet" type="text/css" href="/static/Index/css/header.css">
+    <link rel="stylesheet" type="text/css" href="/static/Index/css/footer.css">
+    <link rel="stylesheet" href="/static/Index/css/zzsc1.css">
+    <script src="/static/Index/js/hm.js"></script>
+    </script><script type="text/javascript" src="/static/Index/js/rich_ex.js"></script>
+    <script type="text/javascript" async="" src="/static/Index/js/pr.js"></script>
+    <script src="/static/Index/js/k.asp.js">
+    </script><script src="/static/Index/js/jgai.js" type="text/javascript"></script>
+    <script src="/static/Index/js/hd.js" type="text/javascript"></script>
+    <style type="text/css">
+        a{
+            text-decoration: none;
+            color: black;
+
+        }
+        a:hover{color:red;}
+        body{
+             background: white;
+        }
+		#video{
+			
+			width: 1004px;
+			height: 560px;
+			/*background: blue;*/
+			margin:auto;
+            /*margin-top: 30px;*/
+            margin-bottom: 80px;
+		}
+        #title{
+            width: 1004px;
+            height: 80px;
+            margin:auto;
+            background: white;
+        }
+        .videonav{
+            width: auto;
+            height: 40px;
+            line-height: 40px;
+            padding-left: 10px;
+        }
+        .videodes{
+            color: red;
+            text-align:right;
+            margin-top: 10px;
+            margin-right: 10px;
+        }
+        .videonavl{
+            float: left;
+        }
+        .videonavr{
+             float: right;
+             margin-right: 10px;
+        }
+        #clear{
+            clear: both;
+        }
+    </style>
+   </head>
+<body>
+<div id="content">
+
+         {include file="Common/nav" /}
+
+        <div id="title">
+            <div class="videonav">
+            <div class="videonavl">
+            <span>当前位置:&nbsp;</span><a href="{$Think.config.host}">首页&nbsp;</a>><a href="/{$catename.rewriteurl}.html">&nbsp;{$catename.catename}&nbsp;</a>>&nbsp; 
+            <span> 
+            {if condition="(60 <  mb_strlen($videoData.video_title)   )"}
+                    {$videoData.video_title |mb_substr=0,60,'utf-8'}......
+                    {else /}
+                     {$videoData.video_title}
+            {/if}</span>
+            </div>
+            <div class="videonavr">
+            <span >{$videoData.addtime|date='Y-m-d H:i:s',###}</span>
+            </div>
+            <div id='clear'></div>
+            </div>
+            <input type="hidden" id="videoid" name="videoid" value="{$videoData.id}">
+            <div class="videodes">
+                <span>如出现不能播放,请ctrl+f5刷新浏览器! 站长qq:1693509008</span>
+            </div>
+        </div>
+		<div id="video">
+			<iframe height="100%" width="100%" src="https://jx.618g.com/?url={$videoData.video_link}" frameborder=0 'allowfullscreen>
+            </iframe>
+           <!--  <video width="100%" src="http://v11-tt.ixigua.com/38f032da536d35e86f292d85e0645d3b/5b2353ae/video/m/220df920aa5c6e14ad3873dad4b23ad7eb5115822f300003630aa7e0923/" controls="controls"></video> -->
+
+		</div>
+        {include file="Common/footer"/}
+
+      <!--   <div>{$videoData.content}</div> -->
+        
+    <!-- <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?34e1317f0014e85a9bbb65e636d6e48a";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script> -->
+
+    <!-- <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?23d5da3923987c7d7f21afb3ae1bb3ad";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script> -->
+
+
+</div>
+<script type="text/javascript">
+function click(id,type){
+    $.ajax({
+        type: 'get',
+        url: "{$Think.config.host}/click",
+        data: {
+            id:id,
+            type:type
+        },
+        dataType: 'json',
+        success: function(data){
+            //console.log('Ajaxhits成功');
+        },
+        error:function(data){
+            //console.log('Ajaxhits异常！');
+        }
+    });
+}
+var id=$('#videoid').val();
+window.onload=click(id,1);
+</script>
+</body></html>

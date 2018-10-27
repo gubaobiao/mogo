@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>看企业管理平台—我的视频</title>
+	<script src="__PUBLIC__/user/jq/jquery-1.11.1.min.js"></script>
+	<link rel="stylesheet" href="__PUBLIC__/user/bootstrap/css/bootstrap.min.css">
+	<script src="__PUBLIC__/user/bootstrap/js/bootstrap.min.js"></script>
+	<script src="__PUBLIC__/user/layer/layer.js"></script>
+	<link rel="stylesheet" href="__PUBLIC__/user/css/public.css">
+	<link rel="stylesheet" href="__PUBLIC__/user/css/myself.css">
+	<!--[if lt IE 9]>
+	    <script src="__PUBLIC__/user/bootstrap/js/html5shiv.min.js"></script>
+	    <script src="__PUBLIC__/user/bootstrap/js/respond.min.js"></script>
+    <![endif]-->
+    <style type="text/css">
+    	.title_box{
+    		width: 378px;
+    	}
+    	.box_head .td-5{
+    		border-right: 1px solid #E6E6E6;
+    	}
+    	.qx-sc{
+    		cursor: pointer;
+    	}
+    	.td-5{
+    		width: 15%;
+    	}
+    	.td-1{
+    		width: 51%;
+    	}
+    </style>
+</head>
+<body>
+	<div id="kqy_main">
+		<div class="kqy_content">
+			<div class="box_head">
+				<div class="td-1"></div>
+				<div class="td-2">上传者</div>
+				<div class="td-5">系统评分</div>
+				<div class="td-4">收藏日期</div>
+				<div class="td-3">操作</div>
+			</div>
+			
+			<!--遍历-->
+			<foreach name="list" item="vo">
+				<div class="box animated"><input type="hidden" name="id" value="{$vo.aid}">
+				<div class="td-1">
+					<div class="td1-top">
+						<div class="mask_img"><img src="{$vo.img}" alt="">
+							<div class="mask">
+								<a href="{$vo.article_url}" target="_blank" class="see_btn">查看文章</a>
+							</div>
+						</div>
+						<div class="title_box">
+							<div class="title_top">{$vo.title}</div>
+							<div class="title_tgenre"><span>{$vo.tgenre}</span></div>
+							<div class="title_time">发布于 {$vo.time}</div>
+						</div>
+					</div>
+				</div>
+                  <php>
+				    if(strlen($vo['username'])=='11'){
+                           $tel = substr_replace($vo['username'], '****', 3, 4);
+                        }else{
+                           $tel =$vo['username'];
+                        }
+					</php>
+					<div class="td-2">{$tel}</div>
+				<div class="td-5">
+					<div class="fraction">{$vo.score}分</div>
+				</div>
+				
+				<div class="td-4"><span class="span20"><span>{$vo.add_time|date="Y-m-d H:i",###}</span></span></div>
+				<div class="td-3">
+						<span class="qx-sc">取消收藏</span>
+					</span>
+				</div>
+			</div>
+			</foreach>
+			<!--/遍历-->
+		</div>
+		
+		<!--分页放此标签内-->
+		<div class="fy-new">{$show}</div>
+		<!--/分页放此标签内-->
+	</div>
+	
+	<script src="__PUBLIC__/user/js/my_video.js"></script>
+
+	<script>
+		//取消收藏
+		$(document).on('click','.qx-sc',function(e){
+			var $this = $(this);
+			var id = $this.parent().parent().find('input[name="id"]').val();
+			//$this.parent().parent().remove();
+			//alert(id);
+			//debugger
+			e.preventDefault();
+			$.ajax({
+				type: 'POST',
+				url: '{:U('User/index/qx_article')}',
+				data: {
+					id:id,
+				},
+				dataType: 'json',
+				success:function(data){
+					if(data.status == 1){
+						$this.parent().parent().remove();
+					}else if(data.status == 0){
+						//console.log('取消收藏失败');
+						alert('取消收藏失败');
+					}else{
+						//console.log('取消收藏失败--未知的返回值');
+					}
+					
+				}
+			})
+		});
+
+	</script>
+</body>
+</html>
